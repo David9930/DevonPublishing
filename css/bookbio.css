@@ -320,12 +320,13 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--primary-color);
     margin-bottom: 15px;
     font-size: 1.4em;
-    padding-left: 5px; /* Added padding to prevent icon overlap */
+    text-align: center; /* Center the titles */
 }
 
 .timeline-content p {
     color: #666;
     line-height: 1.6;
+    text-align: center; /* Center the paragraph text as well for consistency */
 }
 
 /* Author Note Section */
