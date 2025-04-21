@@ -398,6 +398,115 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.6;
 }
 
+/* Self-destruct timer */
+.self-destruct-timer {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: red;
+    padding: 10px 15px;
+    border-radius: 5px;
+    z-index: 1000;
+    font-family: 'Special Elite', monospace;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    border: 1px solid red;
+    text-align: center;
+}
+
+.timer-label {
+    font-size: 0.8em;
+    margin-bottom: 5px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.countdown {
+    font-size: 1.8em;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.countdown.warning {
+    animation: flash 0.5s infinite alternate;
+}
+
+@keyframes flash {
+    from { color: red; text-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+    to { color: white; text-shadow: 0 0 10px red; }
+}
+
+/* Self-destruct overlay */
+.self-destruct-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+}
+
+.self-destruct-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    animation: glitch 0.3s ease;
+}
+
+.self-destruct-message {
+    text-align: center;
+    color: white;
+    max-width: 500px;
+    padding: 40px;
+    border: 2px solid red;
+    background-color: rgba(50, 0, 0, 0.8);
+    position: relative;
+}
+
+.self-destruct-message h2 {
+    font-family: 'Special Elite', cursive;
+    font-size: 2em;
+    margin-bottom: 30px;
+    color: red;
+    letter-spacing: 2px;
+}
+
+.self-destruct-message p {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    font-family: 'Special Elite', cursive;
+}
+
+.restart-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-family: 'Special Elite', cursive;
+    transition: all 0.3s ease;
+}
+
+.restart-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-5px, 5px); }
+    40% { transform: translate(5px, -5px); }
+    60% { transform: translate(-5px, -5px); }
+    80% { transform: translate(5px, 5px); }
+    100% { transform: translate(0); }
+}
+
 /* Mobile menu toggle */
 .mobile-menu-toggle {
     display: none;
