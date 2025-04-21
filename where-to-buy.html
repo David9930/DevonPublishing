@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Where To Buy | Devon Publishing Llc</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/where-to-buy.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="site-header">
@@ -16,7 +21,7 @@
                 <nav class="main-navigation">
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="where-to-buy.html">Where To Buy</a></li>
+                        <li><a href="where-to-buy.html" class="active">Where To Buy</a></li>
                         <li><a href="#">Book Bio</a></li>
                         <li><a href="#">Works</a></li>
                         <li><a href="#">Bio</a></li>
@@ -26,33 +31,214 @@
                         <li><a href="#">Blog</a></li>
                     </ul>
                 </nav>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
         </div>
     </header>
+    
     <main class="main-content">
         <section class="where-to-buy-section">
-            <div class="container" style="text-align: center;">
-                <h1>Where to Buy</h1>
-                <h3>Amazon KDP</h3>
-                <div class="buy-buttons">
-                    <p><a href="https://www.amazon.ca/dp/1738651908/ref=sr_1_1?crid=3SJPZCHXU6P4A&keywords=A+Letter+Guide+For+Rebecca&qid=1686328960&s=books&sprefix=a+letter+guide+for+rebecca%2Cstripbooks%2C100&sr=1-1" target="_blank" rel="noreferrer noopener" class="button amazon-button">Canadian ebook or Paperback order CLICK HERE</a></p>
-                    <p><a href="https://www.amazon.com/dp/1738651908/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=1686329080&sr=1-2" target="_blank" rel="noreferrer noopener" class="button amazon-button">USA ebook or Paperback order CLICK HERE</a></p>
-                    <p><a href="https://www.amazon.co.uk/dp/B0C7H7RSX2/ref=sr_1_1?crid=1CY2MV0PRWU2V&keywords=a+letter+guide+for+rebecca&qid=1686252534&s=books&sprefix=a+letter+guide+for+rebecca+%2Cstripbooks%2C163&sr=1-1" target="_blank" rel="noreferrer noopener" class="button amazon-button">UK ebook or Paperback order CLICK HERE</a></p>
+            <div class="container">
+                <div class="purchase-card">
+                    <h1>Where to Buy</h1>
+                    <div class="divider">
+                        <span><i class="fas fa-book-open"></i></span>
+                    </div>
+                    
+                    <h3><i class="fab fa-amazon"></i> Available on Amazon</h3>
+                    
+                    <div class="country-tabs">
+                        <button class="tab-button active" data-country="usa">USA</button>
+                        <button class="tab-button" data-country="canada">Canada</button>
+                        <button class="tab-button" data-country="uk">UK</button>
+                        <button class="tab-button" data-country="other">Other Countries</button>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <div class="country-tab active" id="usa">
+                            <div class="format-options">
+                                <div class="format-option">
+                                    <div class="format-icon"><i class="fas fa-tablet-alt"></i></div>
+                                    <h4>eBook</h4>
+                                    <p>Instant delivery to your device</p>
+                                    <a href="https://www.amazon.com/dp/B0C7H7RSX2" target="_blank" rel="noreferrer noopener" class="button amazon-button">
+                                        <i class="fas fa-shopping-cart"></i> Buy eBook
+                                    </a>
+                                </div>
+                                <div class="format-option">
+                                    <div class="format-icon"><i class="fas fa-book"></i></div>
+                                    <h4>Paperback</h4>
+                                    <p>Physical copy delivered to your door</p>
+                                    <a href="https://www.amazon.com/dp/1738651908" target="_blank" rel="noreferrer noopener" class="button amazon-button">
+                                        <i class="fas fa-shopping-cart"></i> Buy Paperback
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="country-tab" id="canada">
+                            <div class="format-options">
+                                <div class="format-option">
+                                    <div class="format-icon"><i class="fas fa-tablet-alt"></i></div>
+                                    <h4>eBook</h4>
+                                    <p>Instant delivery to your device</p>
+                                    <a href="https://www.amazon.ca/dp/B0C7H7RSX2" target="_blank" rel="noreferrer noopener" class="button amazon-button">
+                                        <i class="fas fa-shopping-cart"></i> Buy eBook
+                                    </a>
+                                </div>
+                                <div class="format-option">
+                                    <div class="format-icon"><i class="fas fa-book"></i></div>
+                                    <h4>Paperback</h4>
+                                    <p>Physical copy delivered to your door</p>
+                                    <a href="https://www.amazon.ca/dp/1738651908" target="_blank" rel="noreferrer noopener" class="button amazon-button">
+                                        <i class="fas fa-shopping-cart"></i> Buy Paperback
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="country-tab" id="uk">
+                            <div class="format-options">
+                                <div class="format-option">
+                                    <div class="format-icon"><i class="fas fa-tablet-alt"></i></div>
+                                    <h4>eBook</h4>
+                                    <p>Instant delivery to your device</p>
+                                    <a href="https://www.amazon.co.uk/dp/B0C7H7RSX2" target="_blank" rel="noreferrer noopener" class="button amazon-button">
+                                        <i class="fas fa-shopping-cart"></i> Buy eBook
+                                    </a>
+                                </div>
+                                <div class="format-option">
+                                    <div class="format-icon"><i class="fas fa-book"></i></div>
+                                    <h4>Paperback</h4>
+                                    <p>Physical copy delivered to your door</p>
+                                    <a href="https://www.amazon.co.uk/dp/1738651908" target="_blank" rel="noreferrer noopener" class="button amazon-button">
+                                        <i class="fas fa-shopping-cart"></i> Buy Paperback
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="country-tab" id="other">
+                            <div class="other-countries-info">
+                                <p>Please visit your local Amazon website and search for:</p>
+                                <div class="search-term">
+                                    <i class="fas fa-search"></i> "A Letter Guide For Rebecca"
+                                </div>
+                                <p>Or use the direct ASIN: B0C7H7RSX2 (eBook) / 1738651908 (Paperback)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bulk-order-section">
+                        <h3><i class="fas fa-boxes"></i> Bulk Orders</h3>
+                        <p>Looking to purchase multiple copies for a school, book club, or organization?</p>
+                        <div class="contact-form-container">
+                            <button id="show-contact-form" class="button">Inquire About Bulk Orders</button>
+                            <div id="contact-form" class="hidden">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" id="name" placeholder="Your Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" placeholder="Your Email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="quantity">Quantity</label>
+                                        <input type="number" id="quantity" min="10" placeholder="Number of copies">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message">Message</label>
+                                        <textarea id="message" placeholder="Additional details..."></textarea>
+                                    </div>
+                                    <button type="button" class="button submit-button">Submit Inquiry</button>
+                                </form>
+                            </div>
+                            <p class="bulk-email">Or email directly: <a href="mailto:BulkOrder@DevonPublishing.com">BulkOrder@DevonPublishing.com</a></p>
+                        </div>
+                    </div>
                 </div>
-                <p class="other-countries-note">
-                    All other Countries, please goto your local Amazon website and search for book title
-                </p>
-                <p class="bulk-order-note">
-                    For any bulk sales orders, please contact:<br>
-                    BulkOrder@DevonPublishing.com
-                </p>
             </div>
         </section>
     </main>
+    
     <footer class="site-footer">
         <div class="container">
-            <p>&copy; 2023 by Devon Publishing.</p>
+            <p>&copy; 2023 by Devon Publishing. All rights reserved.</p>
         </div>
     </footer>
-</body>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const countryTabs = document.querySelectorAll('.country-tab');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Hide all tabs
+                countryTabs.forEach(tab => tab.classList.remove('active'));
+                // Show the selected tab
+                const country = button.getAttribute('data-country');
+                document.getElementById(country).classList.add('active');
+            });
+        });
+        
+        // Contact form toggle
+        const showFormButton = document.getElementById('show-contact-form');
+        const contactForm = document.getElementById('contact-form');
+        
+        showFormButton.addEventListener('click', () => {
+            contactForm.classList.toggle('hidden');
+            if (!contactForm.classList.contains('hidden')) {
+                showFormButton.textContent = 'Hide Form';
+            } else {
+                showFormButton.textContent = 'Inquire About Bulk Orders';
+            }
+        });
+        
+        // Submit button functionality
+        const submitButton = document.querySelector('.submit-button');
+        
+        submitButton.addEventListener('click', () => {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            
+            if (name && email) {
+                alert('Thank you for your inquiry! We will contact you shortly.');
+                contactForm.classList.add('hidden');
+                showFormButton.textContent = 'Inquire About Bulk Orders';
+                
+                // Clear form
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('quantity').value = '';
+                document.getElementById('message').value = '';
+            } else {
+                alert('Please fill in your name and email address.');
+            }
+        });
+
+        // Add subtle animation to the format icons
+        const formatIcons = document.querySelectorAll('.format-icon');
+        formatIcons.forEach(icon => {
+            icon.addEventListener('mouseover', () => {
+                icon.style.transform = 'scale(1.1) rotate(5deg)';
+            });
+            
+            icon.addEventListener('mouseout', () => {
+                icon.style.transform = 'scale(1) rotate(0)';
+            });
+        });
+    });
+    </script>
+</head>
 </html>
