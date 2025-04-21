@@ -9,15 +9,10 @@ body, h1, h2, h3, h4, h5, h6, p, ul, li, header, nav, main, section, footer, img
 body {
     line-height: 1.6;
     color: #333; /* Basic text color */
-    /* Apply your background image here */
-    background-image: url('../images/BackgroundTypewriterPic.jpg'); /* !! REPLACE FILENAME !! */
-    background-size: cover; /* Cover the entire page */
-    background-position: center center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-attachment: fixed; /* Optional: Makes the background fixed during scroll */
     min-height: 100vh; /* Ensure body takes full viewport height */
     display: flex;
     flex-direction: column;
+    /* Remove background image from body */
 }
 
 .container {
@@ -28,7 +23,7 @@ body {
 
 /* Header & Navigation */
 .site-header {
-    background-color: rgba(230, 230, 230, 0.9); /* Semi-transparent light background, adjust as needed */
+    background-color: rgba(230, 230, 230, 0.9); /* Semi-transparent light background */
     padding: 15px 0;
     border-bottom: 1px solid #ddd;
 }
@@ -69,15 +64,20 @@ body {
 /* Main Content */
 .main-content {
     flex-grow: 1; /* Allows main content to fill space pushing footer down */
-    padding: 40px 0;
-    background-color: rgba(255, 255, 255, 0.8); /* Optional: Light overlay for readability */
-    margin-top: 20px; /* Space below header */
-    margin-bottom: 20px; /* Space above footer */
+    /* Add background image here instead of on body */
+    background-image: url('../images/BackgroundTypewriterPic.jpg');
+    background-size: cover;
+    background-position: top center; /* Position from top */
+    background-repeat: no-repeat;
+    padding: 0; /* Remove padding to allow the image to touch the nav */
+    margin: 0; /* Remove margins */
 }
 
 .hero-section {
     text-align: center;
-    padding-bottom: 40px;
+    padding: 40px 0;
+    background-color: rgba(255, 255, 255, 0.8); /* Light overlay for readability */
+    margin-top: 0; /* Remove space to touch the header */
 }
 
 .hero-section h1 {
