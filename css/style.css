@@ -5,7 +5,6 @@ body, h1, h2, h3, h4, h5, h6, p, ul, li, header, nav, main, section, footer, img
     box-sizing: border-box;
     font-family: sans-serif; /* Basic fallback font */
 }
-
 body {
     line-height: 1.6;
     color: #333; /* Basic text color */
@@ -14,13 +13,11 @@ body {
     flex-direction: column;
     /* No background image here */
 }
-
 .container {
     width: 90%;
     max-width: 980px; /* Similar to the Wix site width */
     margin: 0 auto; /* Center the content */
 }
-
 /* Header & Navigation - Now Fixed */
 .site-header {
     background-color: rgba(230, 230, 230, 0.9); /* Semi-transparent light background */
@@ -31,40 +28,33 @@ body {
     top: 0; /* Position at top */
     z-index: 1000; /* Ensure it stays on top of other elements */
 }
-
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
 .site-branding a {
     font-weight: bold;
     text-decoration: none;
     color: #333;
     font-size: 1.2em;
 }
-
 .main-navigation ul {
     list-style: none;
     display: flex;
 }
-
 .main-navigation li {
     margin-left: 20px;
 }
-
 .main-navigation a {
     text-decoration: none;
     color: #555;
     padding: 5px 0;
 }
-
 .main-navigation a:hover {
     color: #000;
     border-bottom: 1px solid #000;
 }
-
 /* Main Content - Add padding to account for fixed header */
 .main-content {
     flex-grow: 1;
@@ -72,7 +62,6 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 /* Typewriter section - separate from the hero section */
 .typewriter-section {
     background-image: url('../images/BackgroundTypewriterPic.jpg');
@@ -86,48 +75,40 @@ body {
     justify-content: center;
     align-items: center;
 }
-
 .hero-section {
     text-align: center;
     padding: 40px 0;
     background-color: rgba(255, 255, 255, 0.8); /* Light overlay for readability */
 }
-
 .hero-section h1 {
     font-size: 3em;
     margin-bottom: 10px;
     color: #4682B4;
 }
-
 .hero-section .subtitle {
     font-size: 1.2em;
     margin-bottom: 40px;
     color: #555;
 }
-
 .hero-section h2 {
     font-size: 2em;
     margin-bottom: 20px;
     font-style: italic;
 }
-
 .book-feature {
     margin-top: 30px;
 }
-
 .book-cover-placeholder {
     max-width: 300px;
     height: auto;
     border: 1px solid #ccc;
     margin-bottom: 15px;
 }
-
 .book-feature h6 {
     font-size: 1.3em;
     font-weight: bold;
     margin-bottom: 20px;
 }
-
 .button {
     display: inline-block;
     padding: 10px 20px;
@@ -138,10 +119,59 @@ body {
     border-radius: 3px;
     transition: background-color 0.3s, color 0.3s;
 }
-
 .button:hover {
     background-color: #555;
     color: #fff;
+}
+
+/* Where To Buy page specific styles */
+.where-to-buy-section {
+    background-image: url('../images/WhereToBuyPic.jpg');
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    padding: 60px 0;
+    min-height: 600px;
+    text-align: center;
+}
+
+.where-to-buy-section h1 {
+    font-size: 3em;
+    margin-bottom: 30px;
+    color: #4682B4;
+}
+
+.where-to-buy-section h3 {
+    font-size: 1.8em;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.buy-buttons {
+    margin: 40px 0;
+}
+
+.buy-buttons p {
+    margin: 20px 0;
+}
+
+.amazon-button {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 15px 30px;
+    font-weight: bold;
+}
+
+.other-countries-note, .bulk-order-note {
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 15px;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.bulk-order-note {
+    margin-top: 40px;
+    font-weight: bold;
 }
 
 /* Footer */
