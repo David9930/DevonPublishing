@@ -10,7 +10,7 @@ body {
     line-height: 1.6;
     color: #333; /* Basic text color */
     /* Apply your background image here */
-    background-image: url('../images/your-background-image.jpg'); /* !! REPLACE FILENAME !! */
+    background-image: url('../BackgroundTypewriterPic.jpg'); /* !! REPLACE FILENAME !! */
     background-size: cover; /* Cover the entire page */
     background-position: center center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
