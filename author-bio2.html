@@ -13,71 +13,31 @@
     <!-- Tilt.js for 3D effect -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
     <style>
-        /* Extra CSS to ensure overlay is initially hidden properly */
-        .self-destruct-overlay {
-            opacity: 0 !important;
-            visibility: hidden !important;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-        
-        .self-destruct-overlay.active {
-            opacity: 1 !important;
-            visibility: visible !important;
-        }
-        
-        /* Small notification for sound enabled */
-        .sound-notification {
+        /* Sound button styling */
+        .enable-sound-button {
             position: fixed;
-            bottom: 20px;
+            top: 150px;
             right: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: 1px solid #666;
-            padding: 8px 15px;
-            border-radius: 5px;
-            z-index: 1000;
-            font-family: 'Special Elite', monospace;
-            font-size: 0.8em;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        
-        .sound-notification.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Make the cta-button more visible */
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
             background-color: #e74c3c;
-            color: white !important;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 500;
-            font-size: 1.1em;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: 'Special Elite', monospace;
+            cursor: pointer;
+            z-index: 2000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
         }
-
-        .cta-button:hover {
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .enable-sound-button:hover {
             background-color: #c0392b;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .cta-button i {
-            margin-left: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button:hover i {
-            transform: translateX(5px);
         }
     </style>
 </head>
@@ -94,7 +54,7 @@
                         <li><a href="where-to-buy.html">Where To Buy</a></li>
                         <li><a href="bookbio.html">Book Bio</a></li>
                         <li><a href="#">Works</a></li>
-                        <li><a href="author-bio-test.html" class="active">Bio</a></li>
+                        <li><a href="author-bio2.html" class="active">Bio</a></li>
                         <li><a href="#">In the Press</a></li>
                         <li><a href="#">News & Events</a></li>
                         <li><a href="#">Contact</a></li>
@@ -114,10 +74,10 @@
         <div class="countdown" id="countdown">00:45</div>
     </div>
 
-    <!-- Sound enabled notification -->
-    <div class="sound-notification" id="sound-notification">
-        <i class="fas fa-volume-up"></i> Countdown beeps enabled
-    </div>
+    <!-- Prominent enable sound button -->
+    <button id="enable-sound-button" class="enable-sound-button">
+        <i class="fas fa-volume-up"></i> Enable Countdown Beeps
+    </button>
 
     <!-- Self-destruct message overlay -->
     <div class="self-destruct-overlay" id="self-destruct-overlay">
@@ -256,11 +216,6 @@
         </div>
     </footer>
 
-    <!-- Audio element for beep sound -->
-    <audio id="beep-sound" preload="auto">
-        <source src="data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjI5LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAAKAAAJPAAGBgYGDAwMDA8PDw8WFhYWGxsbGyIiIiIoKCgoLy8vLzY2NjY7Ozs7QkJCQklJSUlQUFBQV1dXV15eXl5lZWVlbGxsbHJycnJ5eXl5gICAgo2NjY2UlJSUnZ2dnaNj2mOfY9pjn2PaY59j2mOfY9pj2mOfY9pjn2PaY59j2mO7u7u7x8fHx8/Pz8/X19fX3t7e3uXl5eXs7Ozs9PT09Pv7+/v///8AAAA5TEFNRTMuMTAwBK8AAAAALPsAABRAJALwTQABzAAAkyZsPeHrAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//sQxAAAYxoRhEMgAfJwAkDoBABmkAAAAAABPhVXYOAAE+xoABpEAAJ8AAAIAAABJhUXYOAAABPhVXYOAAE+AAAAQAAAASYVFwAP/3PYAWQAAoLAARWCJgBMQAAnJ94ODg4OADAdoADAQAMIwwKBoDgAGBJESTMC40AQAA" type="audio/mpeg">
-    </audio>
-
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize tilt effect
@@ -323,51 +278,51 @@
             el.style.setProperty('--redaction-width', `${randomWidth}%`);
         });
 
-        // ===== IMPROVED BEEP SOUND IMPLEMENTATION WITH SCROLL TRIGGER =====
+        // ===== SIMPLIFIED BEEP SOUND IMPLEMENTATION =====
         
         // Get elements
         const selfDestructOverlay = document.getElementById('self-destruct-overlay');
         const countdownElement = document.getElementById('countdown');
         const restartButton = document.getElementById('restart-button');
-        const beepSound = document.getElementById('beep-sound');
-        const soundNotification = document.getElementById('sound-notification');
+        const enableSoundButton = document.getElementById('enable-sound-button');
         
         // Sound enabled flag
         let soundEnabled = false;
-        let scrollTriggered = false;
         
-        // Enable sound on scroll
-        function enableSoundOnScroll() {
-            if (scrollTriggered) return; // Only trigger once
+        // Create a simple beep function
+        function playBeep() {
+            if (!soundEnabled) return;
             
-            scrollTriggered = true;
-            
-            // Try to play and pause to enable audio
-            beepSound.play().then(() => {
-                beepSound.pause();
-                beepSound.currentTime = 0;
+            // Create a simple beep sound
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
                 
-                // Enable sounds and show notification
-                soundEnabled = true;
-                soundNotification.classList.add('visible');
+                oscillator.type = 'square';
+                oscillator.frequency.value = 800;
+                gainNode.gain.value = 0.1;
                 
-                // Hide notification after 3 seconds
-                setTimeout(() => {
-                    soundNotification.classList.remove('visible');
-                }, 3000);
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
                 
-                console.log("Sound enabled successfully via scroll");
-            }).catch(err => {
-                console.log("Error enabling sound:", err);
-                scrollTriggered = false; // Allow retry
-            });
+                oscillator.start();
+                setTimeout(() => oscillator.stop(), 200);
+            } catch (error) {
+                console.error("Error playing beep:", error);
+            }
         }
         
-        // Listen for scroll events
-        window.addEventListener('scroll', enableSoundOnScroll, { once: false });
-        
-        // Also try to enable sound on first user interaction
-        document.addEventListener('click', enableSoundOnScroll, { once: true });
+        // Enable sound on button click
+        enableSoundButton.addEventListener('click', function() {
+            soundEnabled = true;
+            enableSoundButton.style.display = 'none';
+            
+            // Play a test beep
+            playBeep();
+            
+            console.log("Sound enabled");
+        });
         
         // Set initial time (45 seconds)
         let timeLeft = 45;
@@ -380,8 +335,10 @@
             countdownElement.textContent = '00:45';
             countdownElement.classList.remove('warning');
             
+            // Show sound button
+            enableSoundButton.style.display = 'block';
+            
             // Hide the overlay
-            selfDestructOverlay.classList.remove('active');
             selfDestructOverlay.style.opacity = '0';
             selfDestructOverlay.style.visibility = 'hidden';
             
@@ -407,15 +364,9 @@
             // Format the time
             countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             
-            console.log(`Time left: ${timeLeft} seconds`);
-            
             // Play beep sound in last 5 seconds
-            if (timeLeft <= 5 && timeLeft > 0 && soundEnabled) {
-                beepSound.currentTime = 0;
-                beepSound.play().catch(err => {
-                    console.log("Error playing beep:", err);
-                });
-                
+            if (timeLeft <= 5 && timeLeft > 0) {
+                playBeep();
                 console.log("Beep played at " + timeLeft + " seconds");
                 
                 // Add warning class to flash timer
@@ -433,25 +384,12 @@
         function selfDestruct() {
             console.log("Self-destruct triggered");
             
-            // Play final beep if sound is enabled
-            if (soundEnabled) {
-                beepSound.currentTime = 0;
-                beepSound.play().catch(err => {
-                    console.log("Error playing final beep:", err);
-                });
-            }
+            // Play final beep
+            playBeep();
             
-            // Force overlay to be visible with multiple methods for reliability
+            // Show overlay
             selfDestructOverlay.style.opacity = '1';
             selfDestructOverlay.style.visibility = 'visible';
-            selfDestructOverlay.classList.add('active');
-            
-            // Set a timeout to ensure visibility
-            setTimeout(() => {
-                if (!selfDestructOverlay.classList.contains('active')) {
-                    selfDestructOverlay.classList.add('active');
-                }
-            }, 100);
         }
         
         // Reset everything on restart
