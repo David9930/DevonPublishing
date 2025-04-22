@@ -245,9 +245,13 @@
             el.style.setProperty('--redaction-width', `${randomWidth}%`);
         });
 
+        // Make sure the overlay is initially hidden
+        const selfDestructOverlay = document.getElementById('self-destruct-overlay');
+        selfDestructOverlay.style.opacity = '0';
+        selfDestructOverlay.style.visibility = 'hidden';
+
         // Self-destruct timer functionality
         const countdownElement = document.getElementById('countdown');
-        const selfDestructOverlay = document.getElementById('self-destruct-overlay');
         const restartButton = document.getElementById('restart-button');
         
         // Set initial time (45 seconds)
@@ -257,31 +261,44 @@
         
         // Create beep sound
         function createBeepSound() {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            
-            return function playBeep() {
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 
-                oscillator.type = 'square';
-                oscillator.frequency.value = 800;
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                gainNode.gain.value = 0.1;
-                oscillator.start();
-                setTimeout(() => oscillator.stop(), 200);
-            };
+                return function playBeep() {
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.type = 'square';
+                    oscillator.frequency.value = 800;
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    gainNode.gain.value = 0.1;
+                    oscillator.start();
+                    setTimeout(() => oscillator.stop(), 200);
+                };
+            } catch (e) {
+                console.log("Audio context not available");
+                return function() {};
+            }
         }
         
         // Start the countdown
         function startCountdown() {
-            try {
-                beepSound = createBeepSound();
-            } catch (e) {
-                console.log("Audio context not available");
+            // Reset timer display
+            timeLeft = 45;
+            countdownElement.textContent = '00:45';
+            countdownElement.classList.remove('warning');
+            
+            // Create beep sound function
+            beepSound = createBeepSound();
+            
+            // Clear any existing interval
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
             }
             
+            // Start new countdown
             countdownInterval = setInterval(updateCountdown, 1000);
         }
         
@@ -318,10 +335,7 @@
         
         // Reset everything on restart
         restartButton.addEventListener('click', function() {
-            timeLeft = 45;
             selfDestructOverlay.classList.remove('active');
-            countdownElement.classList.remove('warning');
-            clearInterval(countdownInterval);
             startCountdown();
         });
         
