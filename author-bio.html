@@ -116,7 +116,7 @@
 
     <!-- Sound trigger button -->
     <button class="sound-trigger" id="sound-trigger">
-        <i class="fas fa-volume-up"></i> Enable Sounds
+        <i class="fas fa-volume-up"></i> Click to Enable Sounds
     </button>
 
     <!-- Self-destruct message overlay -->
@@ -256,194 +256,198 @@
         </div>
     </footer>
 
-    <!-- Audio files for beeps -->
-    <audio id="beep-sound" preload="auto">
-        <source src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tAwAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAAElgCenp6enp6enp6enp6enp6enp6enp6enp6enp6enp6enp6enp6enp6enp6enp6enp6e//////////////////////////////////////////////////////////////////8AAAAATGF2YzU4LjEzAAAAAAAAAAAAAAAAJAVCAAAAAAAABJbyhWOFAAAAAAD/+xDEAAAIEAF59BAAITYBLz6CAAk9mXjYe4cAN7MzHw5g4YEaEhsV//8KQhCXj//4fwQBCEJjGPocHhQf/8QhMY/JBCEIT//+SBCEIP///wiBCEJikPqFIQhD/xCDih/5nE5/9QrlM6f3+WdPsjCH8KQ1v/73xHpBT/0/z5/9kBQoEfFJk8yQU/4oPqGCJlKFPCkP/kIbJBT/6uQ0//BCEIH//0BhoRQMBuYwGsE5brNrQtpRV9SstpPsL5t5aTOOTXt1dWNWq+r////6v+vgoMBA0GYCBoICgeCAYFAoXBQMDA4GBwQDAgEDEojFRmI7USREyeZPOqnp////+f//Sh4IwhCFIe5CEP+H/8FCMfLf/pYQh//+EIUIQg/5CEIUh///4hCEKQpCH/CEIOWcpTIKQ5iFQjnKE6IQhLznJgiFMQhCHIXzlOlIQpCFKZCEIQhSkKQpCFJiEIQhCEIQmIQhCYhCFJiEIQhCan/5CEITEJcOgsaJIKxTqwrEfH/QafQ/Q2qVZf//9f/f1/v6gQEAgIBwWEBAKBgJt8nfvweb//pb////pNhfqA38D/dCwAILOUCqCsUk8QDgIAhoVChPbktbUBc/9vp+kIYtIHUw5yH+2MOk5yCNj8gkAggBMEBAZABoR15YwFR+QCt+j//NiXCCx84QL4UcB/P//+t/QFsGBxgsQHw+///9OyGQOEgQ38RcgmH7eBxotdKXLOr0s8vV5JGkkZ6RTNWJG7SNP3s7Ox4a2t4YFZZ/2U6btodLI+5Th+VdkkbUnaSOQOcPyUdkkfUjBUZ4wN6I/FQRKAIxEM7UaDQlnwEKDQyMj7UekdnqRB0ZH5QdWe4NI+MUCiAUoDQrxiOTgVH55sXmQdGKB0ZJMX7PRj00FxfmRQPzTJizMizMxXmz0exQO0Fj9Bioa5a/TsqHu0G+bXc2vdv3/rf/P/+G9WE5F7jn5+JJ1iWwbk+4YIGdZr/+xDEFgALwOVpvalTQY6dLT7HqJhmAQ0yAZvmcPZOqbQNomShkwEIGEBAgNLTv1pVVlX/JLYYL+iOQTCHBh8RwgaIjkwUQIAiGC6RH///nwhYYfCj///////0PggCy1zrNkXUBTjgIrDShMjuuYcplpZKxpn5ZW0pXbSv0nWaRldb1//1zr3pOy+jZLxUcKjy4ePFX1bWp91qXcNLU1NLqTCKBYqFkGXKQW7uMkgmNAFGGDQRGgEjQCggMEAwhGARlwIwMIHQEmwKCAQCBURAL9UgyAAwCVgKAIwSAhhcMAQJvFxAgALhUjIoHQqDA4YeBO/2e/ZEGIAVFUxBDlL5DF9H/LQ5S+YUZTEQMp///5hT8wt5/8xBiFMKeFP/9//nK////yC0hURU89KUxCkMQUCYVAiAgn6huhgigaHCiCwiRQNDpQEz4NHvE03U0y7oRVSXd2LrK6nVUjVTx7tIyqv6rv//7P/r2+/Z//6f/LV/9e7++v9/pQKAQSDhQFAoXBAKAoEAoXAQECgMEBAQFAoFAQFAUDAQKgQEBAKCAsEDJIJDAYjVoXR5tQhT9QXR+FIU/MKYviDhT0Qfb9rX/VPxCj+Qcf/MQfzCn/pX//b+6///+/9P//8bB8K1n7S9JgwDlB5qHrKwxkcJ1nDTFu+vUaMaEMG3jKs11rRdXf///6gAX9QAGBQKA/8CBQGAQv1rMpzgCBQAAoFAgABQGAgFAf//8CD/rUFAYF///gTGLTxFG7//2vf/JfXVqvkFhQfwv4SzrLbMJl37NVWsyhPGcbcRRn//////0F/0Af1AYGBQKA//0AdAAqK7///BQGAoCBfoR6urVVQ2H923vbZMHDcvpuVsKvGdZiN2Y13KHIi2UOX////////8G/8AA6AAAABoA/uuf3vYxgBOCBEHwdCQ2CgWLQP/9QD9QHAQcBgIGQUBgGAgD//wIDQHAfDv//wJ7WiCHkv///+FHIYhCj/KQpPMKQpCHIYhCE8hCHIQn/lIQhiEP/+QpCEMQh//kKPTf//5xTEFNRTMuOTkuNVVVVVVVVVVVVVVVVVVV//sQxCCDywDpTPYeAAF2nS3ex6hgVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV" type="audio/mp3">
+    <!-- Audio element for beep sound -->
+    <audio id="beep-audio" preload="auto">
+        <source src="data:audio/mp3;base64,//uQxAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAAFAAAGhgCAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwODg4ODg4ODg4ODg4ODg4ODg4P////////////////////////////////8AAAA8TEFNRTMuOTlyAc0AAAAAAAAAABSAJAJAQgAAgAAAAoZ5iQK7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//sQxAADwAABpAAAACAAANIAAAAEAAACQAAAAIAAANIAAAAQAAAMiIiIiIiIhERERETERMzMmZkzMmZTMwAzESEREREiEREREAAAAESIiIiIiIiIiIiIiIiIiIiIiJmZmZmZmZmImIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIgA" type="audio/mp3">
     </audio>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Initialize tilt effect
-        VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
-        
-        // Mobile menu toggle
-        const menuToggle = document.querySelector('.mobile-menu-toggle');
-        const mainNav = document.querySelector('.main-navigation');
-        
-        menuToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-        });
-        
-        // Typewriter effect
-        const typewriterText = document.querySelector('.typewriter');
-        const text = typewriterText.textContent;
-        typewriterText.textContent = '';
-        
-        let i = 0;
-        function typeWriter() {
-            if (i < text.length) {
-                typewriterText.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
-            }
-        }
-        
-        setTimeout(typeWriter, 500);
-        
-        // Secret message functionality
-        const redactedTexts = document.querySelectorAll('.redacted');
-        
-        redactedTexts.forEach(text => {
-            text.addEventListener('click', () => {
-                text.classList.toggle('revealed');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize tilt effect
+            VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
+            
+            // Mobile menu toggle
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const mainNav = document.querySelector('.main-navigation');
+            
+            menuToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
             });
-        });
-        
-        // Easter egg - reveal secret message on konami code
-        let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-        let konamiPosition = 0;
-        
-        document.addEventListener('keydown', function(e) {
-            if (e.key === konamiCode[konamiPosition]) {
-                konamiPosition++;
-                
-                if (konamiPosition === konamiCode.length) {
-                    document.getElementById('secret-message').classList.add('revealed');
+            
+            // Typewriter effect
+            const typewriterText = document.querySelector('.typewriter');
+            const text = typewriterText.textContent;
+            typewriterText.textContent = '';
+            
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    typewriterText.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+            
+            setTimeout(typeWriter, 500);
+            
+            // Secret message functionality
+            const redactedTexts = document.querySelectorAll('.redacted');
+            
+            redactedTexts.forEach(text => {
+                text.addEventListener('click', () => {
+                    text.classList.toggle('revealed');
+                });
+            });
+            
+            // Easter egg - reveal secret message on konami code
+            let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+            let konamiPosition = 0;
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === konamiCode[konamiPosition]) {
+                    konamiPosition++;
+                    
+                    if (konamiPosition === konamiCode.length) {
+                        document.getElementById('secret-message').classList.add('revealed');
+                        konamiPosition = 0;
+                    }
+                } else {
                     konamiPosition = 0;
                 }
-            } else {
-                konamiPosition = 0;
-            }
-        });
-        
-        // Initialize random redaction positions
-        const redactionElements = document.querySelectorAll('.redacted');
-        redactionElements.forEach(el => {
-            const randomWidth = Math.floor(Math.random() * 20) + 80; // 80-100%
-            el.style.setProperty('--redaction-width', `${randomWidth}%`);
-        });
-
-        // ===== FIXED SELF-DESTRUCT IMPLEMENTATION =====
-        
-        // Get elements
-        const selfDestructOverlay = document.getElementById('self-destruct-overlay');
-        const countdownElement = document.getElementById('countdown');
-        const restartButton = document.getElementById('restart-button');
-        const soundTrigger = document.getElementById('sound-trigger');
-        const beepSound = document.getElementById('beep-sound');
-        
-        // Audio context and flag for sound enabled
-        let audioEnabled = false;
-        let audioContext = null;
-        
-        // Enable sound on button click
-        soundTrigger.addEventListener('click', function() {
-            audioEnabled = true;
-            soundTrigger.style.display = 'none';
+            });
             
-            // Try to play the beep sound to ensure audio is enabled
-            try {
-                beepSound.play().then(() => {
-                    // Success - sound is working
-                    console.log("Sound enabled");
+            // Initialize random redaction positions
+            const redactionElements = document.querySelectorAll('.redacted');
+            redactionElements.forEach(el => {
+                const randomWidth = Math.floor(Math.random() * 20) + 80; // 80-100%
+                el.style.setProperty('--redaction-width', `${randomWidth}%`);
+            });
+
+            // ===== SIMPLIFIED BEEP SOUND IMPLEMENTATION =====
+            
+            // Get elements
+            const selfDestructOverlay = document.getElementById('self-destruct-overlay');
+            const countdownElement = document.getElementById('countdown');
+            const restartButton = document.getElementById('restart-button');
+            const soundTrigger = document.getElementById('sound-trigger');
+            const beepAudio = document.getElementById('beep-audio');
+            
+            // Sound enabled flag
+            let soundEnabled = false;
+            
+            // Enable sound on button click
+            soundTrigger.addEventListener('click', function() {
+                // Play a silent sound to unlock audio
+                beepAudio.play().then(() => {
+                    beepAudio.pause();
+                    beepAudio.currentTime = 0;
+                    
+                    // Enable sounds and hide button
+                    soundEnabled = true;
+                    soundTrigger.style.display = 'none';
+                    
+                    console.log("Sound enabled successfully");
                 }).catch(err => {
-                    console.log("Error playing sound:", err);
+                    console.log("Error enabling sound:", err);
+                    alert("Please try clicking the sound button again.");
                 });
-            } catch(e) {
-                console.log("Error with audio:", e);
-            }
-        });
-        
-        // Play beep function
-        function playBeep() {
-            if (audioEnabled) {
-                try {
-                    // Reset and play the sound
-                    beepSound.currentTime = 0;
-                    beepSound.play().catch(err => {
+            });
+            
+            // Simple function to play beep
+            function playBeep() {
+                if (soundEnabled) {
+                    beepAudio.currentTime = 0;
+                    beepAudio.play().catch(err => {
                         console.log("Error playing beep:", err);
                     });
-                } catch(e) {
-                    console.log("Error with beep playback:", e);
                 }
             }
-        }
-        
-        // Set initial time (45 seconds)
-        let timeLeft = 45;
-        let countdownInterval;
-        
-        // Start the countdown
-        function startCountdown() {
-            // Reset timer display
-            timeLeft = 45;
-            countdownElement.textContent = '00:45';
-            countdownElement.classList.remove('warning');
             
-            // Hide the overlay
-            selfDestructOverlay.classList.remove('active');
+            // Set initial time (45 seconds)
+            let timeLeft = 45;
+            let countdownInterval;
             
-            // Clear any existing interval
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
+            // Start the countdown
+            function startCountdown() {
+                // Reset timer display
+                timeLeft = 45;
+                countdownElement.textContent = '00:45';
+                countdownElement.classList.remove('warning');
+                
+                // Hide the overlay
+                selfDestructOverlay.classList.remove('active');
+                selfDestructOverlay.style.opacity = '0';
+                selfDestructOverlay.style.visibility = 'hidden';
+                
+                // Clear any existing interval
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                }
+                
+                // Start new countdown
+                countdownInterval = setInterval(updateCountdown, 1000);
+                
+                console.log("Countdown started");
             }
             
-            // Start new countdown
-            countdownInterval = setInterval(updateCountdown, 1000);
-        }
-        
-        // Update countdown timer
-        function updateCountdown() {
-            // Decrement the timer first
-            timeLeft--;
+            // Update countdown timer
+            function updateCountdown() {
+                // Decrement the timer first
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                
+                // Format the time
+                countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                console.log(`Time left: ${timeLeft} seconds`);
+                
+                // Play beep sound in last 5 seconds
+                if (timeLeft <= 5 && timeLeft > 0) {
+                    playBeep();
+                    console.log("Beep played at " + timeLeft + " seconds");
+                    
+                    // Add warning class to flash timer
+                    countdownElement.classList.add('warning');
+                }
+                
+                // Check if time is up
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    selfDestruct();
+                }
+            }
             
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            
-            // Format the time
-            countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            // Play beep sound in last 5 seconds
-            if (timeLeft <= 5 && timeLeft > 0) {
+            // Execute self-destruct
+            function selfDestruct() {
+                console.log("Self-destruct triggered");
+                
+                // Play final beep
                 playBeep();
                 
-                // Add warning class to flash timer
-                countdownElement.classList.add('warning');
+                // Force overlay to be visible with multiple methods for reliability
+                selfDestructOverlay.style.opacity = '1';
+                selfDestructOverlay.style.visibility = 'visible';
+                selfDestructOverlay.classList.add('active');
+                
+                // Set a timeout to ensure visibility
+                setTimeout(() => {
+                    if (!selfDestructOverlay.classList.contains('active')) {
+                        selfDestructOverlay.classList.add('active');
+                    }
+                }, 100);
             }
             
-            // Check if time is up
-            if (timeLeft <= 0) {
-                clearInterval(countdownInterval);
-                selfDestruct();
-            }
-        }
-        
-        // Execute self-destruct
-        function selfDestruct() {
-            // Force overlay to be visible
-            selfDestructOverlay.style.opacity = '1';
-            selfDestructOverlay.style.visibility = 'visible';
-            selfDestructOverlay.classList.add('active');
+            // Reset everything on restart
+            restartButton.addEventListener('click', function() {
+                console.log("Restart button clicked");
+                startCountdown();
+            });
             
-            // Play a final beep
-            playBeep();
-        }
-        
-        // Reset everything on restart
-        restartButton.addEventListener('click', function() {
-            selfDestructOverlay.classList.remove('active');
-            
-            // Force hide with inline styles
-            selfDestructOverlay.style.opacity = '0';
-            selfDestructOverlay.style.visibility = 'hidden';
-            
-            // Restart timer
+            // Start countdown on page load
             startCountdown();
         });
-        
-        // Start countdown on page load
-        startCountdown();
-    });
     </script>
 </body>
 </html>
