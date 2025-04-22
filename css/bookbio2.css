@@ -1,1 +1,499 @@
+/* Book Bio Page Styles */
 
+:root {
+    --primary-color: #4682B4;
+    --secondary-color: #333;
+    --accent-color: #e67e22;
+    --light-bg: rgba(255, 255, 255, 0.9);
+    --dark-bg: rgba(0, 0, 0, 0.7);
+    --transition: all 0.3s ease;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Active navigation item */
+.main-navigation a.active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    font-weight: bold;
+}
+
+/* Book Hero Section */
+.book-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/BackgroundTypewriterPic.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    padding: 120px 0;
+    text-align: center;
+    color: white;
+}
+
+.book-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.book-hero h1 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    text-transform: none;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.book-hero .tagline {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+    font-style: italic;
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    transition: var(--transition);
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover {
+    background-color: #365e7d;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button i {
+    margin-left: 10px;
+    transition: var(--transition);
+}
+
+.cta-button:hover i {
+    transform: translateX(5px);
+}
+
+/* Book Synopsis Section */
+.book-synopsis {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+}
+
+.book-synopsis h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: var(--primary-color);
+    text-align: center;
+    position: relative;
+}
+
+.book-synopsis h2:after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: var(--accent-color);
+    margin: 15px auto 0;
+}
+
+.synopsis-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.question-card {
+    display: flex;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.question-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.question-card.expanded {
+    background-color: #f0f7ff;
+}
+
+.question-icon {
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-size: 1.5em;
+    transition: var(--transition);
+}
+
+.question-card:hover .question-icon {
+    background-color: var(--accent-color);
+}
+
+.question-text {
+    padding: 20px;
+    flex: 1;
+}
+
+.question-text h3 {
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    color: var(--secondary-color);
+    transition: var(--transition);
+}
+
+.question-card:hover .question-text h3 {
+    color: var(--primary-color);
+}
+
+.question-content {
+    height: auto;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.question-content.hidden {
+    max-height: 0;
+}
+
+.question-card.expanded .question-content {
+    max-height: 100px;
+    margin-top: 10px;
+}
+
+.question-content p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Story Overview Section */
+.story-overview {
+    padding: 100px 0;
+    background-color: white;
+}
+
+.story-overview-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.story-text {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.story-text h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+}
+
+.story-text h2:after {
+    content: '';
+    display: block;
+    width: 60%;
+    height: 3px;
+    background-color: var(--accent-color);
+    margin: 15px auto 0;
+}
+
+.story-text p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto 20px;
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 3px;
+    background-color: #e0e0e0;
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    margin-bottom: 50px;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.timeline-item:nth-child(even) {
+    justify-content: flex-end;
+}
+
+.timeline-icon {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(-50%);
+    z-index: 0; /* Changed from 1 to 0 to prevent overlap */
+    box-shadow: 0 0 0 4px white, 0 0 0 5px #e0e0e0;
+    transition: var(--transition);
+}
+
+.timeline-item:hover .timeline-icon {
+    background-color: var(--accent-color);
+    transform: translateX(-50%) scale(1.1);
+}
+
+.timeline-content {
+    width: 45%;
+    background-color: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    position: relative;
+    transition: var(--transition);
+    z-index: 2; /* Increased to ensure content appears above icons */
+}
+
+.timeline-item:hover .timeline-content {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.timeline-content:before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    transform: rotate(45deg);
+}
+
+.timeline-item:nth-child(odd) .timeline-content:before {
+    right: -10px;
+}
+
+.timeline-item:nth-child(even) .timeline-content:before {
+    left: -10px;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    margin-right: 20px; /* Increased space between content and center line */
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    margin-left: 20px; /* Increased space between content and center line */
+}
+
+.timeline-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.4em;
+    text-align: center; /* Center the titles */
+}
+
+.timeline-content p {
+    color: #666;
+    line-height: 1.6;
+    text-align: center; /* Center the paragraph text as well for consistency */
+}
+
+/* Author Note Section */
+.author-note {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+}
+
+.author-note-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+}
+
+.quote-icon {
+    font-size: 2em;
+    color: var(--primary-color);
+    opacity: 0.2;
+    margin-bottom: 20px;
+}
+
+blockquote {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #555;
+    font-style: italic;
+    margin-bottom: 30px;
+    padding: 0 40px;
+}
+
+blockquote footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #777;
+    font-style: normal;
+}
+
+.hidden-message {
+    display: inline-block;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    margin-left: 10px;
+}
+
+.hidden-message.revealed {
+    opacity: 1;
+}
+
+.website-link {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.website-link a {
+    color: var(--primary-color);
+    font-weight: 500;
+    text-decoration: underline;
+    transition: var(--transition);
+}
+
+.website-link a:hover {
+    color: var(--accent-color);
+}
+
+.reveal-button {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.reveal-button:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: rotate(90deg);
+}
+
+/* Mobile menu toggle */
+.mobile-menu-toggle {
+    display: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .book-hero h1 {
+        font-size: 2.5em;
+    }
+    
+    .book-hero .tagline {
+        font-size: 1.2em;
+    }
+    
+    .timeline:before {
+        left: 30px;
+    }
+    
+    .timeline-icon {
+        left: 30px;
+        transform: translateX(0);
+    }
+    
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        justify-content: flex-start;
+    }
+    
+    .timeline-content {
+        width: calc(100% - 80px);
+        margin-left: 60px;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content:before,
+    .timeline-item:nth-child(even) .timeline-content:before {
+        left: -10px;
+        right: auto;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .main-navigation {
+        display: none;
+    }
+    
+    .main-navigation.active {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--light-bg);
+        padding: 20px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+    
+    .main-navigation.active ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .main-navigation.active li {
+        margin-left: 0;
+    }
+}
