@@ -1,1 +1,568 @@
+/* Author Bio Page Styles */
 
+:root {
+    --primary-color: #4682B4;
+    --secondary-color: #333;
+    --accent-color: #e67e22;
+    --light-bg: rgba(255, 255, 255, 0.9);
+    --dark-bg: rgba(0, 0, 0, 0.7);
+    --transition: all 0.3s ease;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --file-color: #f5f5f5;
+    --stamp-color: rgba(255, 0, 0, 0.7);
+    --redacted-color: #000;
+    --highlight-color: #ffc107;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f0f0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Active navigation item */
+.main-navigation a.active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    font-weight: bold;
+}
+
+/* Author Hero Section */
+.author-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/BackgroundTypewriterPic.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    padding: 100px 0;
+    text-align: center;
+    position: relative;
+}
+
+.author-hero h1 {
+    color: white;
+    font-size: 3.5em;
+    margin: 0;
+    font-family: 'Special Elite', cursive;
+    letter-spacing: 3px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Typewriter cursor effect */
+.typewriter::after {
+    content: '|';
+    position: absolute;
+    right: -15px;
+    color: white;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    from, to { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Author Profile Section */
+.author-profile {
+    padding: 60px 0;
+    margin-top: -50px;
+}
+
+.profile-card {
+    background-color: var(--file-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.profile-header {
+    padding: 30px;
+    background-color: var(--light-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ddd;
+    position: relative;
+}
+
+.profile-img-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    perspective: 1000px;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.profile-image:hover {
+    transform: rotateY(180deg);
+}
+
+.profile-badge {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9em;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-badge i {
+    font-size: 1.1em;
+}
+
+.profile-stamp {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transform: rotate(15deg);
+    font-family: 'Special Elite', cursive;
+    color: var(--stamp-color);
+    border: 3px solid var(--stamp-color);
+    padding: 8px 15px;
+    font-size: 1.5em;
+    letter-spacing: 2px;
+    opacity: 0.9;
+    text-transform: uppercase;
+}
+
+.profile-content {
+    padding: 40px;
+    position: relative;
+}
+
+.disclaimer {
+    background-color: rgba(255, 204, 0, 0.2);
+    border-left: 4px solid var(--highlight-color);
+    padding: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-style: italic;
+}
+
+.disclaimer i {
+    font-size: 1.5em;
+    color: var(--highlight-color);
+}
+
+.redacted-text {
+    line-height: 1.8;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+.redacted-text p {
+    margin-bottom: 20px;
+}
+
+.redacted {
+    position: relative;
+    background-color: var(--redacted-color);
+    color: transparent;
+    padding: 0 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    display: inline-block;
+}
+
+.redacted::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--redacted-color);
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.redacted.revealed {
+    color: inherit;
+}
+
+.redacted.revealed::before {
+    opacity: 0;
+}
+
+.highlight {
+    background-color: var(--highlight-color);
+    padding: 0 3px;
+    font-weight: 500;
+}
+
+.author-dossier {
+    background-color: rgba(70, 130, 180, 0.1);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.author-dossier h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Special Elite', cursive;
+    letter-spacing: 1px;
+}
+
+.dossier-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.dossier-item {
+    padding: 10px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.dossier-item .label {
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin-right: 10px;
+}
+
+.secret-message {
+    display: none;
+    margin: 30px 0;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: var(--border-radius);
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.secret-message.revealed {
+    display: block;
+    padding: 30px;
+    max-height: 500px;
+}
+
+.message-content {
+    border: 1px dashed var(--primary-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.message-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Special Elite', cursive;
+}
+
+.signature {
+    text-align: right;
+    font-style: italic;
+    font-family: 'Special Elite', cursive;
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+.file-stamp {
+    margin-top: 40px;
+    text-align: center;
+    position: relative;
+}
+
+.file-stamp::before,
+.file-stamp::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    height: 1px;
+    background-color: #ddd;
+    width: 45%;
+}
+
+.file-stamp::before {
+    left: 0;
+}
+
+.file-stamp::after {
+    right: 0;
+}
+
+.file-stamp span {
+    background-color: var(--file-color);
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+    color: #999;
+    font-size: 0.9em;
+    letter-spacing: 3px;
+}
+
+/* Author Notes Section */
+.author-notes {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+}
+
+.notes-card {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.notes-card h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--primary-color);
+    font-family: 'Special Elite', cursive;
+    position: relative;
+}
+
+.notes-card h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+    margin: 15px auto 0;
+}
+
+.notes-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.note {
+    background-color: #fefadd;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform-style: preserve-3d;
+    transform: rotate(var(--rotation));
+    --rotation: 0deg;
+    position: relative;
+}
+
+.note:nth-child(1) {
+    --rotation: -2deg;
+}
+
+.note:nth-child(2) {
+    --rotation: 1deg;
+}
+
+.note:nth-child(3) {
+    --rotation: -1deg;
+}
+
+.note-header {
+    text-align: center;
+    margin-bottom: 15px;
+    color: var(--accent-color);
+    font-size: 1.5em;
+}
+
+.note-body {
+    font-family: 'Special Elite', cursive;
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+/* Self-destruct timer */
+.self-destruct-timer {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: red;
+    padding: 10px 15px;
+    border-radius: 5px;
+    z-index: 1000;
+    font-family: 'Special Elite', monospace;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    border: 1px solid red;
+    text-align: center;
+}
+
+.timer-label {
+    font-size: 0.8em;
+    margin-bottom: 5px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.countdown {
+    font-size: 1.8em;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.countdown.warning {
+    animation: flash 0.5s infinite alternate;
+}
+
+@keyframes flash {
+    from { color: red; text-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+    to { color: white; text-shadow: 0 0 10px red; }
+}
+
+/* Self-destruct overlay */
+.self-destruct-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+}
+
+.self-destruct-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    animation: glitch 0.3s ease;
+}
+
+.self-destruct-message {
+    text-align: center;
+    color: white;
+    max-width: 500px;
+    padding: 40px;
+    border: 2px solid red;
+    background-color: rgba(50, 0, 0, 0.8);
+    position: relative;
+}
+
+.self-destruct-message h2 {
+    font-family: 'Special Elite', cursive;
+    font-size: 2em;
+    margin-bottom: 30px;
+    color: red;
+    letter-spacing: 2px;
+}
+
+.self-destruct-message p {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    font-family: 'Special Elite', cursive;
+}
+
+.restart-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-family: 'Special Elite', cursive;
+    transition: all 0.3s ease;
+}
+
+.restart-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-5px, 5px); }
+    40% { transform: translate(5px, -5px); }
+    60% { transform: translate(-5px, -5px); }
+    80% { transform: translate(5px, 5px); }
+    100% { transform: translate(0); }
+}
+
+/* Mobile menu toggle */
+.mobile-menu-toggle {
+    display: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .profile-stamp {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-top: 20px;
+    }
+    
+    .dossier-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .notes-content {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .main-navigation {
+        display: none;
+    }
+    
+    .main-navigation.active {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--light-bg);
+        padding: 20px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+    
+    .main-navigation.active ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .main-navigation.active li {
+        margin-left: 0;
+    }
+}
