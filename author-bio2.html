@@ -12,9 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet">
     <!-- Tilt.js for 3D effect -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
-    <!-- Enhanced audio.js for better sound support -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
-    <!-- Fix for audio and visibility issues -->
     <style>
         /* Extra CSS to ensure overlay is initially hidden properly */
         .self-destruct-overlay {
@@ -28,8 +25,8 @@
             visibility: visible !important;
         }
         
-        /* Sound trigger button */
-        .sound-trigger {
+        /* Small notification for sound enabled */
+        .sound-notification {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -40,14 +37,15 @@
             border-radius: 5px;
             z-index: 1000;
             font-family: 'Special Elite', monospace;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 0.8em;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
         
-        .sound-trigger:hover {
-            background-color: rgba(0, 0, 0, 0.9);
+        .sound-notification.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         /* Make the cta-button more visible */
@@ -96,7 +94,7 @@
                         <li><a href="where-to-buy.html">Where To Buy</a></li>
                         <li><a href="bookbio.html">Book Bio</a></li>
                         <li><a href="#">Works</a></li>
-                        <li><a href="author-bio.html" class="active">Bio</a></li>
+                        <li><a href="author-bio-test.html" class="active">Bio</a></li>
                         <li><a href="#">In the Press</a></li>
                         <li><a href="#">News & Events</a></li>
                         <li><a href="#">Contact</a></li>
@@ -116,10 +114,10 @@
         <div class="countdown" id="countdown">00:45</div>
     </div>
 
-    <!-- Sound trigger button -->
-    <button class="sound-trigger" id="sound-trigger">
-        <i class="fas fa-volume-up"></i> Click to Enable Sounds
-    </button>
+    <!-- Sound enabled notification -->
+    <div class="sound-notification" id="sound-notification">
+        <i class="fas fa-volume-up"></i> Countdown beeps enabled
+    </div>
 
     <!-- Self-destruct message overlay -->
     <div class="self-destruct-overlay" id="self-destruct-overlay">
@@ -325,50 +323,61 @@
             el.style.setProperty('--redaction-width', `${randomWidth}%`);
         });
 
-        // ===== IMPROVED BEEP SOUND IMPLEMENTATION =====
+        // ===== IMPROVED BEEP SOUND IMPLEMENTATION WITH SCROLL TRIGGER =====
         
         // Get elements
         const selfDestructOverlay = document.getElementById('self-destruct-overlay');
         const countdownElement = document.getElementById('countdown');
         const restartButton = document.getElementById('restart-button');
-        const soundTrigger = document.getElementById('sound-trigger');
         const beepSound = document.getElementById('beep-sound');
+        const soundNotification = document.getElementById('sound-notification');
         
         // Sound enabled flag
         let soundEnabled = false;
+        let scrollTriggered = false;
         
-        // Enable sound on button click
-        soundTrigger.addEventListener('click', function() {
-            // Play a silent sound to unlock audio
+        // Enable sound on scroll
+        function enableSoundOnScroll() {
+            if (scrollTriggered) return; // Only trigger once
+            
+            scrollTriggered = true;
+            
+            // Try to play and pause to enable audio
             beepSound.play().then(() => {
                 beepSound.pause();
                 beepSound.currentTime = 0;
                 
-                // Test beep to confirm it works
-                setTimeout(() => {
-                    beepSound.play();
-                }, 500);
-                
-                // Enable sounds and hide button
+                // Enable sounds and show notification
                 soundEnabled = true;
-                soundTrigger.style.display = 'none';
+                soundNotification.classList.add('visible');
                 
-                console.log("Sound enabled successfully");
+                // Hide notification after 3 seconds
+                setTimeout(() => {
+                    soundNotification.classList.remove('visible');
+                }, 3000);
+                
+                console.log("Sound enabled successfully via scroll");
             }).catch(err => {
                 console.log("Error enabling sound:", err);
-                alert("Please try clicking the sound button again.");
+                scrollTriggered = false; // Allow retry
             });
-        });
+        }
         
-        // Set initial time (30 seconds)
-        let timeLeft = 30;
+        // Listen for scroll events
+        window.addEventListener('scroll', enableSoundOnScroll, { once: false });
+        
+        // Also try to enable sound on first user interaction
+        document.addEventListener('click', enableSoundOnScroll, { once: true });
+        
+        // Set initial time (45 seconds)
+        let timeLeft = 45;
         let countdownInterval;
         
         // Start the countdown
         function startCountdown() {
             // Reset timer display
-            timeLeft = 30;
-            countdownElement.textContent = '00:30';
+            timeLeft = 45;
+            countdownElement.textContent = '00:45';
             countdownElement.classList.remove('warning');
             
             // Hide the overlay
