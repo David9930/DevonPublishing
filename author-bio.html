@@ -5,79 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Author Bio | Devon Publishing Llc</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/author-bio.css">
+    <link rel="stylesheet" href="css/author-bio2.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet">
     <!-- Tilt.js for 3D effect -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
-    <!-- Fix for audio and visibility issues -->
     <style>
-        /* Extra CSS to ensure overlay is initially hidden properly */
-        .self-destruct-overlay {
-            opacity: 0 !important;
-            visibility: hidden !important;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-        
-        .self-destruct-overlay.active {
-            opacity: 1 !important;
-            visibility: visible !important;
-        }
-        
-        /* Sound trigger button */
-        .sound-trigger {
+        /* Sound button styling */
+        .enable-sound-button {
             position: fixed;
-            bottom: 20px;
+            top: 150px;
             right: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: #e74c3c;
             color: white;
-            border: 1px solid #666;
-            padding: 8px 15px;
+            border: none;
+            padding: 10px 20px;
             border-radius: 5px;
-            z-index: 1000;
             font-family: 'Special Elite', monospace;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            z-index: 2000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
         }
         
-        .sound-trigger:hover {
-            background-color: rgba(0, 0, 0, 0.9);
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
         
-        /* Make the cta-button more visible */
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: #e74c3c;
-            color: white !important;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 500;
-            font-size: 1.1em;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .cta-button:hover {
+        .enable-sound-button:hover {
             background-color: #c0392b;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
-
-        .cta-button i {
-            margin-left: 10px;
-            transition: all 0.3s ease;
+        
+        /* Passive notification */
+        .passive-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: 'Special Elite', monospace;
+            z-index: 2000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
-
-        .cta-button:hover i {
-            transform: translateX(5px);
+        
+        .passive-notification.visible {
+            display: block;
+            opacity: 1;
+        }
+        
+        /* Touch interaction overlay - invisible but captures touch for mobile */
+        .touch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 1; /* Low z-index so other interactions still work */
+            display: block;
         }
     </style>
 </head>
@@ -94,7 +89,7 @@
                         <li><a href="where-to-buy.html">Where To Buy</a></li>
                         <li><a href="bookbio.html">Book Bio</a></li>
                         <li><a href="#">Works</a></li>
-                        <li><a href="author-bio.html" class="active">Bio</a></li>
+                        <li><a href="author-bio2.html" class="active">Bio</a></li>
                         <li><a href="#">In the Press</a></li>
                         <li><a href="#">News & Events</a></li>
                         <li><a href="#">Contact</a></li>
@@ -108,16 +103,24 @@
         </div>
     </header>
     
+    <!-- Invisible touch overlay to capture passive interaction -->
+    <div id="touch-overlay" class="touch-overlay"></div>
+    
     <!-- Self-destruct timer -->
     <div class="self-destruct-timer">
         <div class="timer-label">FILE SELF-DESTRUCTION:</div>
         <div class="countdown" id="countdown">00:45</div>
     </div>
 
-    <!-- Sound trigger button -->
-    <button class="sound-trigger" id="sound-trigger">
-        <i class="fas fa-volume-up"></i> Click to Enable Sounds
+    <!-- Prominent enable sound button -->
+    <button id="enable-sound-button" class="enable-sound-button">
+        <i class="fas fa-volume-up"></i> Enable Countdown Beeps
     </button>
+
+    <!-- Passive trigger notification -->
+    <div class="passive-notification" id="passive-notification">
+        <i class="fas fa-volume-up"></i> Interaction detected - Beeps enabled!
+    </div>
 
     <!-- Self-destruct message overlay -->
     <div class="self-destruct-overlay" id="self-destruct-overlay">
@@ -256,198 +259,357 @@
         </div>
     </footer>
 
-    <!-- Audio element for beep sound -->
-    <audio id="beep-audio" preload="auto">
-        <source src="data:audio/mp3;base64,//uQxAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAAFAAAGhgCAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwODg4ODg4ODg4ODg4ODg4ODg4P////////////////////////////////8AAAA8TEFNRTMuOTlyAc0AAAAAAAAAABSAJAJAQgAAgAAAAoZ5iQK7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//sQxAADwAABpAAAACAAANIAAAAEAAACQAAAAIAAANIAAAAQAAAMiIiIiIiIhERERETERMzMmZkzMmZTMwAzESEREREiEREREAAAAESIiIiIiIiIiIiIiIiIiIiIiJmZmZmZmZmImIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIgA" type="audio/mp3">
-    </audio>
-
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize tilt effect
-            VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
-            
-            // Mobile menu toggle
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
-            const mainNav = document.querySelector('.main-navigation');
-            
-            menuToggle.addEventListener('click', () => {
-                mainNav.classList.toggle('active');
-            });
-            
-            // Typewriter effect
-            const typewriterText = document.querySelector('.typewriter');
-            const text = typewriterText.textContent;
-            typewriterText.textContent = '';
-            
-            let i = 0;
-            function typeWriter() {
-                if (i < text.length) {
-                    typewriterText.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 100);
-                }
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize tilt effect
+        VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
+        
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const mainNav = document.querySelector('.main-navigation');
+        
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+        
+        // Typewriter effect
+        const typewriterText = document.querySelector('.typewriter');
+        const text = typewriterText.textContent;
+        typewriterText.textContent = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                typewriterText.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
             }
-            
-            setTimeout(typeWriter, 500);
-            
-            // Secret message functionality
-            const redactedTexts = document.querySelectorAll('.redacted');
-            
-            redactedTexts.forEach(text => {
-                text.addEventListener('click', () => {
-                    text.classList.toggle('revealed');
-                });
+        }
+        
+        setTimeout(typeWriter, 500);
+        
+        // Secret message functionality
+        const redactedTexts = document.querySelectorAll('.redacted');
+        
+        redactedTexts.forEach(text => {
+            text.addEventListener('click', () => {
+                text.classList.toggle('revealed');
             });
-            
-            // Easter egg - reveal secret message on konami code
-            let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-            let konamiPosition = 0;
-            
-            document.addEventListener('keydown', function(e) {
-                if (e.key === konamiCode[konamiPosition]) {
-                    konamiPosition++;
-                    
-                    if (konamiPosition === konamiCode.length) {
-                        document.getElementById('secret-message').classList.add('revealed');
-                        konamiPosition = 0;
-                    }
-                } else {
+        });
+        
+        // Easter egg - reveal secret message on konami code
+        let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiPosition = 0;
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === konamiCode[konamiPosition]) {
+                konamiPosition++;
+                
+                if (konamiPosition === konamiCode.length) {
+                    document.getElementById('secret-message').classList.add('revealed');
                     konamiPosition = 0;
                 }
-            });
-            
-            // Initialize random redaction positions
-            const redactionElements = document.querySelectorAll('.redacted');
-            redactionElements.forEach(el => {
-                const randomWidth = Math.floor(Math.random() * 20) + 80; // 80-100%
-                el.style.setProperty('--redaction-width', `${randomWidth}%`);
-            });
+            } else {
+                konamiPosition = 0;
+            }
+        });
+        
+        // Initialize random redaction positions
+        const redactionElements = document.querySelectorAll('.redacted');
+        redactionElements.forEach(el => {
+            const randomWidth = Math.floor(Math.random() * 20) + 80; // 80-100%
+            el.style.setProperty('--redaction-width', `${randomWidth}%`);
+        });
 
-            // ===== SIMPLIFIED BEEP SOUND IMPLEMENTATION =====
+        // ===== MULTIPLE PASSIVE TRIGGER SOUND IMPLEMENTATION =====
+        
+        // Get elements
+        const selfDestructOverlay = document.getElementById('self-destruct-overlay');
+        const countdownElement = document.getElementById('countdown');
+        const restartButton = document.getElementById('restart-button');
+        const enableSoundButton = document.getElementById('enable-sound-button');
+        const passiveNotification = document.getElementById('passive-notification');
+        const touchOverlay = document.getElementById('touch-overlay');
+        
+        // Sound enabled flag and passive detection
+        let soundEnabled = false;
+        let passiveInteractionDetected = false;
+        let notificationTimeout;
+        let autoEnableTimeout;
+        let idleTimer;
+        
+        // Create AudioContext ahead of time
+        let audioContext;
+        try {
+            // We'll initialize this later on user interaction
+            audioContext = null;
+        } catch (error) {
+            console.error("Could not create AudioContext:", error);
+        }
+        
+        // Create a simple beep function
+        function playBeep() {
+            if (!soundEnabled || !audioContext) return;
             
-            // Get elements
-            const selfDestructOverlay = document.getElementById('self-destruct-overlay');
-            const countdownElement = document.getElementById('countdown');
-            const restartButton = document.getElementById('restart-button');
-            const soundTrigger = document.getElementById('sound-trigger');
-            const beepAudio = document.getElementById('beep-audio');
+            // Create a simple beep sound
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.type = 'square';
+                oscillator.frequency.value = 800;
+                gainNode.gain.value = 0.1;
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                // Resume audio context if it was suspended (needed for some browsers)
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+                
+                oscillator.start();
+                setTimeout(() => oscillator.stop(), 200);
+                
+                console.log("Beep played successfully");
+            } catch (error) {
+                console.error("Error playing beep:", error);
+            }
+        }
+        
+        // Initialize audio context on first user interaction
+        function initAudio() {
+            if (!audioContext) {
+                try {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    console.log("AudioContext initialized");
+                } catch (error) {
+                    console.error("Failed to initialize AudioContext:", error);
+                }
+            }
+        }
+        
+        // Enable sound function with test sound
+        function enableSound() {
+            console.log("Enabling sound...");
             
-            // Sound enabled flag
-            let soundEnabled = false;
+            // Initialize audio on first enable
+            initAudio();
             
-            // Enable sound on button click
-            soundTrigger.addEventListener('click', function() {
-                // Play a silent sound to unlock audio
-                beepAudio.play().then(() => {
-                    beepAudio.pause();
-                    beepAudio.currentTime = 0;
-                    
-                    // Enable sounds and hide button
-                    soundEnabled = true;
-                    soundTrigger.style.display = 'none';
-                    
-                    console.log("Sound enabled successfully");
-                }).catch(err => {
-                    console.log("Error enabling sound:", err);
-                    alert("Please try clicking the sound button again.");
+            soundEnabled = true;
+            enableSoundButton.style.display = 'none';
+            
+            // For browsers that require user interaction to start audio
+            if (audioContext && audioContext.state === 'suspended') {
+                audioContext.resume().then(() => {
+                    console.log("AudioContext resumed");
+                    // Play a test beep after context is resumed
+                    setTimeout(playBeep, 100);
                 });
-            });
+            } else {
+                // Play a test beep
+                setTimeout(playBeep, 100);
+            }
+        }
+        
+        // Show the notification that passive interaction was detected
+        function showPassiveNotification() {
+            passiveNotification.classList.add('visible');
             
-            // Simple function to play beep
-            function playBeep() {
-                if (soundEnabled) {
-                    beepAudio.currentTime = 0;
-                    beepAudio.play().catch(err => {
-                        console.log("Error playing beep:", err);
-                    });
-                }
+            if (notificationTimeout) {
+                clearTimeout(notificationTimeout);
             }
             
-            // Set initial time (45 seconds)
-            let timeLeft = 45;
-            let countdownInterval;
-            
-            // Start the countdown
-            function startCountdown() {
-                // Reset timer display
-                timeLeft = 45;
-                countdownElement.textContent = '00:45';
-                countdownElement.classList.remove('warning');
+            notificationTimeout = setTimeout(() => {
+                passiveNotification.classList.remove('visible');
+            }, 3000);
+        }
+        
+        // ===== MULTIPLE PASSIVE TRIGGER METHODS =====
+        
+        // 1. Mouse movement detector (works on desktop)
+        function mouseMovementHandler(e) {
+            if (!passiveInteractionDetected && !soundEnabled) {
+                console.log("Mouse movement detected");
+                passiveInteractionDetected = true;
+                showPassiveNotification();
+                enableSound();
                 
-                // Hide the overlay
-                selfDestructOverlay.classList.remove('active');
-                selfDestructOverlay.style.opacity = '0';
-                selfDestructOverlay.style.visibility = 'hidden';
+                // Remove event listener after triggering
+                document.removeEventListener('mousemove', mouseMovementHandler);
+            }
+        }
+        
+        // 2. Touch interaction detector (works on mobile)
+        function touchHandler() {
+            if (!passiveInteractionDetected && !soundEnabled) {
+                console.log("Touch interaction detected");
+                passiveInteractionDetected = true;
+                showPassiveNotification();
+                enableSound();
                 
-                // Clear any existing interval
-                if (countdownInterval) {
-                    clearInterval(countdownInterval);
-                }
+                // Remove touch event listener after triggering
+                touchOverlay.removeEventListener('touchstart', touchHandler);
+            }
+        }
+        
+        // 3. Click anywhere detector
+        function documentClickHandler() {
+            if (!passiveInteractionDetected && !soundEnabled) {
+                console.log("Document click detected");
+                passiveInteractionDetected = true;
+                showPassiveNotification();
+                enableSound();
                 
-                // Start new countdown
-                countdownInterval = setInterval(updateCountdown, 1000);
-                
-                console.log("Countdown started");
+                // Remove event listener after triggering
+                document.removeEventListener('click', documentClickHandler);
+            }
+        }
+        
+        // 4. Auto-enable after some time on page
+        function setupAutoEnable() {
+            if (autoEnableTimeout) {
+                clearTimeout(autoEnableTimeout);
             }
             
-            // Update countdown timer
-            function updateCountdown() {
-                // Decrement the timer first
-                timeLeft--;
-                
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                
-                // Format the time
-                countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                
-                console.log(`Time left: ${timeLeft} seconds`);
-                
-                // Play beep sound in last 5 seconds
-                if (timeLeft <= 5 && timeLeft > 0) {
-                    playBeep();
-                    console.log("Beep played at " + timeLeft + " seconds");
-                    
-                    // Add warning class to flash timer
-                    countdownElement.classList.add('warning');
+            autoEnableTimeout = setTimeout(() => {
+                if (!passiveInteractionDetected && !soundEnabled) {
+                    console.log("Auto-enabling after time delay");
+                    passiveInteractionDetected = true;
+                    showPassiveNotification();
+                    enableSound();
                 }
-                
-                // Check if time is up
-                if (timeLeft <= 0) {
-                    clearInterval(countdownInterval);
-                    selfDestruct();
-                }
+            }, 10000); // 10 seconds
+        }
+        
+        // 5. Enable on idle detection after content interaction
+        function resetIdleTimer() {
+            if (idleTimer) {
+                clearTimeout(idleTimer);
             }
             
-            // Execute self-destruct
-            function selfDestruct() {
-                console.log("Self-destruct triggered");
+            if (!passiveInteractionDetected && !soundEnabled) {
+                idleTimer = setTimeout(() => {
+                    console.log("User went idle after interaction");
+                    passiveInteractionDetected = true;
+                    showPassiveNotification();
+                    enableSound();
+                }, 5000); // 5 seconds
+            }
+        }
+        
+        // Enable sound on button click (original method)
+        enableSoundButton.addEventListener('click', function() {
+            enableSound();
+            console.log("Sound enabled via button");
+        });
+        
+        // Set initial time (45 seconds)
+        let timeLeft = 45;
+        let countdownInterval;
+        
+        // Start the countdown
+        function startCountdown() {
+            // Reset timer display
+            timeLeft = 45;
+            countdownElement.textContent = '00:45';
+            countdownElement.classList.remove('warning');
+            
+            // Show sound button if sound not enabled yet
+            if (!soundEnabled) {
+                enableSoundButton.style.display = 'block';
                 
-                // Play final beep
+                // Reset passive interaction detection
+                passiveInteractionDetected = false;
+                
+                // Set up all passive triggers again
+                document.addEventListener('mousemove', mouseMovementHandler);
+                touchOverlay.addEventListener('touchstart', touchHandler);
+                document.addEventListener('click', documentClickHandler);
+                setupAutoEnable();
+                
+                // Set up idle detection
+                document.addEventListener('mousemove', resetIdleTimer);
+                document.addEventListener('keydown', resetIdleTimer);
+                document.addEventListener('click', resetIdleTimer);
+                touchOverlay.addEventListener('touchstart', resetIdleTimer);
+            }
+            
+            // Hide the overlay
+            selfDestructOverlay.style.opacity = '0';
+            selfDestructOverlay.style.visibility = 'hidden';
+            
+            // Clear any existing interval
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+            
+            // Start new countdown
+            countdownInterval = setInterval(updateCountdown, 1000);
+            
+            console.log("Countdown started");
+        }
+        
+        // Update countdown timer
+        function updateCountdown() {
+            // Decrement the timer first
+            timeLeft--;
+            
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            
+            // Format the time
+            countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Play beep sound in last 5 seconds
+            if (timeLeft <= 5 && timeLeft > 0) {
                 playBeep();
+                console.log("Beep played at " + timeLeft + " seconds");
                 
-                // Force overlay to be visible with multiple methods for reliability
-                selfDestructOverlay.style.opacity = '1';
-                selfDestructOverlay.style.visibility = 'visible';
-                selfDestructOverlay.classList.add('active');
-                
-                // Set a timeout to ensure visibility
-                setTimeout(() => {
-                    if (!selfDestructOverlay.classList.contains('active')) {
-                        selfDestructOverlay.classList.add('active');
-                    }
-                }, 100);
+                // Add warning class to flash timer
+                countdownElement.classList.add('warning');
             }
             
-            // Reset everything on restart
-            restartButton.addEventListener('click', function() {
-                console.log("Restart button clicked");
-                startCountdown();
-            });
+            // Check if time is up
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                selfDestruct();
+            }
+        }
+        
+        // Execute self-destruct
+        function selfDestruct() {
+            console.log("Self-destruct triggered");
             
-            // Start countdown on page load
+            // Play final beep
+            playBeep();
+            
+            // Show overlay
+            selfDestructOverlay.style.opacity = '1';
+            selfDestructOverlay.style.visibility = 'visible';
+        }
+        
+        // Reset everything on restart
+        restartButton.addEventListener('click', function() {
+            console.log("Restart button clicked");
             startCountdown();
         });
+        
+        // Initialize all passive triggers
+        document.addEventListener('mousemove', mouseMovementHandler);
+        touchOverlay.addEventListener('touchstart', touchHandler);
+        document.addEventListener('click', documentClickHandler);
+        setupAutoEnable();
+        
+        // Set up idle detection
+        document.addEventListener('mousemove', resetIdleTimer);
+        document.addEventListener('keydown', resetIdleTimer);
+        document.addEventListener('click', resetIdleTimer);
+        touchOverlay.addEventListener('touchstart', resetIdleTimer);
+        
+        // Start countdown on page load
+        startCountdown();
+    });
     </script>
 </body>
 </html>
