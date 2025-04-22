@@ -1,1 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Devon Publishing LLC</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/blog.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet">
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Three.js for background effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- Particle background container -->
+    <div id="timeline-background"></div>
+    
+    <!-- Time period indicators -->
+    <div class="time-indicators">
+        <div class="time-indicator past" id="past-indicator">Past</div>
+        <div class="time-indicator present" id="present-indicator">Present</div>
+        <div class="time-indicator future" id="future-indicator">Future</div>
+    </div>
+    
+    <!-- Timeline scrubber -->
+    <div class="timeline-scrubber">
+        <div class="scrubber-track">
+            <div class="scrubber-handle" id="scrubber-handle">
+                <span class="year-display">2023</span>
+            </div>
+        </div>
+    </div>
+    
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="site-branding">
+                    <a href="index.html">Devon Publishing LLC</a>
+                </div>
+                <nav class="main-navigation">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="where-to-buy.html">Where To Buy</a></li>
+                        <li><a href="bookbio.html">Book Bio</a></li>
+                        <li><a href="author-bio.html">Author Bio</a></li>
+                        <li><a href="blog.html" class="active">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <!-- Hero section with parallax effect -->
+        <section class="blog-hero">
+            <div class="parallax-container">
+                <div class="parallax-layer layer-1" data-speed="0.2"></div>
+                <div class="parallax-layer layer-2" data-speed="0.5"></div>
+                <div class="parallax-layer layer-3" data-speed="0.8"></div>
+                <div class="parallax-content">
+                    <h1 class="glitch-text" data-text="Ever Wished for a Do-Over?">Ever Wished for a Do-Over?</h1>
+                    <p class="subtitle typewriter">Dive into "A Letter Guide For Rebecca"</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Blog content with interactive elements -->
+        <section class="blog-content">
+            <div class="container">
+                <div class="timeline-wrapper">
+                    <!-- Article intro with time-rewind effect -->
+                    <article class="blog-article" id="article-content">
+                        <div class="blog-meta">
+                            <span class="blog-date"><i class="fas fa-calendar-alt"></i> Published: <time datetime="2023-10-15">October 15, 2023</time></span>
+                            <div class="time-control">
+                                <button id="rewind-button" class="time-button" title="Rewind content">
+                                    <i class="fas fa-undo"></i> Rewind
+                                </button>
+                                <button id="forward-button" class="time-button" title="Skip forward">
+                                    <i class="fas fa-redo"></i> Fast Forward
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="article-introduction" data-aos="fade-up">
+                            <p class="first-paragraph"><span class="drop-cap">W</span>hat if you could live your life again? Not just relive it, but actively change it, armed with the knowledge of everything that went wrong the first time around? Derek Devon's "A Letter Guide For Rebecca" dives headfirst into this tantalizing premise, blending science fiction, romance, and a healthy dose of regret into a unique narrative presented as a deeply personal guidebook.</p>
+                        </div>
+                        
+                        <div class="section-divider">
+                            <div class="divider-icon"><i class="fas fa-hourglass-half"></i></div>
+                        </div>
+                        
+                        <div class="article-section" data-aos="fade-up">
+                            <h2 class="section-heading">What's It About?</h2>
+                            <div class="content-with-notes">
+                                <div class="main-content">
+                                    <p>The story unfolds through the eyes (and memories) of Derek Devon – or rather, Derek 2.0. He's somehow been given the extraordinary chance to return to his youth, his mind filled with the experiences and knowledge of his <em>first</em> life, which stretched over a century.</p>
+                                    
+                                    <p>This isn't just about correcting youthful mistakes, like awkward school dances or missed opportunities, although those are certainly part of it. Derek 2.0 is on a mission, driven by a profound love for Rebecca (his "It-girl" across two lifetimes) and haunted by the regrets of his past.</p>
+                                    
+                                    <p>He sees this second chance as an opportunity to right wrongs, both personal and potentially world-altering. He uses his foreknowledge to navigate events, aiming to reshape outcomes. But as the narrative cautions, <span class="highlight-quote">"Changes have consequences Rebecca and consequences make change!"</span></p>
+                                </div>
+                                <div class="margin-notes">
+                                    <div class="sticky-note">
+                                        <p>Derek's memories span over a century! Imagine the perspective...</p>
+                                        <div class="pin"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="section-divider">
+                            <div class="divider-icon"><i class="fas fa-book-open"></i></div>
+                        </div>
+                        
+                        <div class="article-section" data-aos="fade-up">
+                            <h2 class="section-heading">A Glimpse Inside: Altering Fate at Gibson's Pond</h2>
+                            
+                            <div class="scene-transition">
+                                <div class="scene-container">
+                                    <div class="scene scene-original">
+                                        <h4 class="timeline-label">Original Timeline</h4>
+                                        <div class="scene-content">
+                                            <p>A seemingly innocent afternoon of playing hooky and swinging on a rope swing ended in tragedy for Rebecca's brother, Todd.</p>
+                                            <div class="scene-image pond-scene tragedy"></div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-arrow">
+                                        <i class="fas fa-long-arrow-alt-right"></i>
+                                    </div>
+                                    <div class="scene scene-altered">
+                                        <h4 class="timeline-label">Altered Timeline</h4>
+                                        <div class="scene-content">
+                                            <p>Derek 2.0 manages to grab the rope just as it snaps, altering the trajectory of Todd's fall and changing a deadly outcome into a painful but survivable landing.</p>
+                                            <div class="scene-image pond-scene rescue"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <p>Without giving away too much, one poignant example of Derek's mission involves an incident at Gibson's Pond. In his original timeline, a seemingly innocent afternoon of playing hooky and swinging on a rope swing ended in tragedy for Rebecca's brother, Todd.</p>
+                            
+                            <p>Armed with this devastating foreknowledge, Derek 2.0 finds himself back at the pond on that fateful day. He knows the exact moment the rope will break and the potentially fatal consequences. The tension builds as he positions himself not just to witness the event, but to intervene.</p>
+                            
+                            <p>In a heart-stopping sequence, he manages to grab the rope just as it snaps, altering the trajectory of Todd's fall and changing a deadly outcome into a painful but survivable landing. This single act highlights the core of Derek's journey: using his unique knowledge to protect those he cares about and wrestling with the immense responsibility that comes with his power.</p>
+                        </div>
+                        
+                        <div class="section-divider">
+                            <div class="divider-icon"><i class="fas fa-star"></i></div>
+                        </div>
+                        
+                        <div class="article-section" data-aos="fade-up">
+                            <h2 class="section-heading">Why Should You Read It?</h2>
+                            <p>"A Letter Guide For Rebecca" offers a compelling blend for readers who enjoy:</p>
+                            
+                            <div class="feature-cards">
+                                <div class="feature-card" data-aos="flip-left" data-aos-delay="100">
+                                    <div class="card-icon"><i class="fas fa-book"></i></div>
+                                    <h3>Unique Narrative Structures</h3>
+                                    <p>The book's format as a guide written by the protagonist to the love of his life is unconventional and intriguing.</p>
+                                </div>
+                                
+                                <div class="feature-card" data-aos="flip-left" data-aos-delay="200">
+                                    <div class="card-icon"><i class="fas fa-clock"></i></div>
+                                    <h3>Time Travel with a Twist</h3>
+                                    <p>It explores the classic "what if" scenario of reliving one's life, focusing on personal redemption and the butterfly effect of changing the past.</p>
+                                </div>
+                                
+                                <div class="feature-card" data-aos="flip-left" data-aos-delay="300">
+                                    <div class="card-icon"><i class="fas fa-rocket"></i></div>
+                                    <h3>Sci-Fi Elements</h3>
+                                    <p>While grounded in relatable emotions like love and regret, the story incorporates science fiction themes, including mysterious encounters and advanced technology.</p>
+                                </div>
+                                
+                                <div class="feature-card" data-aos="flip-left" data-aos-delay="400">
+                                    <div class="card-icon"><i class="fas fa-brain"></i></div>
+                                    <h3>Exploring Deep Themes</h3>
+                                    <p>It delves into the nature of regret, the weight of choices, the complexities of love across time, and the ethics of wielding power over fate.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="article-conclusion">
+                                <p>If you've ever pondered second chances or wondered how different life could be if you knew then what you know now, "A Letter Guide For Rebecca" provides a thought-provoking and emotionally resonant journey. It's a story about fixing the past, facing the consequences, and fighting for love across more than one lifetime.</p>
+                                
+                                <div class="cta-container">
+                                    <a href="where-to-buy.html" class="cta-button">
+                                        <span class="button-text">Begin Your Journey</span>
+                                        <span class="button-icon"><i class="fas fa-arrow-right"></i></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="quantum-footnote">
+                            <div class="quantum-effect">
+                                <p><strong>Quantum Note:</strong> The author hints that much of the story is based on real places and experiences, "if you strip away the sci-fi stuff".</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Interactive timeline easter egg -->
+        <section class="timeline-easter-egg">
+            <div class="container">
+                <div class="secret-message" id="secret-message">
+                    <div class="message-wrapper">
+                        <h3><i class="fas fa-lock-open"></i> Temporal Anomaly Detected</h3>
+                        <p>You've discovered a hidden message across time:</p>
+                        <p class="scrambled-text" id="scrambled-message">12757982... or is it now 13225476082?</p>
+                        <p>Some numbers are worth remembering.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2023 by Devon Publishing. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#" id="timeline-trigger"><i class="fas fa-clock"></i> <span>Find the temporal anomaly</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+        
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const mainNav = document.querySelector('.main-navigation');
+        
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+            });
+        }
+        
+        // Parallax effect for hero section
+        const parallaxLayers = document.querySelectorAll('.parallax-layer');
+        
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.pageYOffset;
+            
+            parallaxLayers.forEach(layer => {
+                const speed = parseFloat(layer.getAttribute('data-speed'));
+                const yPos = -(scrollPosition * speed);
+                layer.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+        
+        // Timeline scrubber interaction
+        const scrubberHandle = document.getElementById('scrubber-handle');
+        const yearDisplay = scrubberHandle.querySelector('.year-display');
+        const timeIndicators = document.querySelectorAll('.time-indicator');
+        let isDragging = false;
+        
+        scrubberHandle.addEventListener('mousedown', function(e) {
+            isDragging = true;
+            document.addEventListener('mousemove', handleScrubberMove);
+            document.addEventListener('mouseup', function() {
+                isDragging = false;
+                document.removeEventListener('mousemove', handleScrubberMove);
+            });
+        });
+        
+        function handleScrubberMove(e) {
+            if (!isDragging) return;
+            
+            const track = document.querySelector('.scrubber-track');
+            const trackRect = track.getBoundingClientRect();
+            
+            // Calculate position within the track (0 to 1)
+            let position = (e.clientX - trackRect.left) / trackRect.width;
+            position = Math.max(0, Math.min(1, position));
+            
+            // Update handle position
+            scrubberHandle.style.left = `${position * 100}%`;
+            
+            // Calculate year (1920 to 2120)
+            const year = Math.round(1920 + position * 200);
+            yearDisplay.textContent = year;
+            
+            // Update time period indicators
+            timeIndicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            if (year < 1980) {
+                document.getElementById('past-indicator').classList.add('active');
+                document.body.setAttribute('data-time-period', 'past');
+            } else if (year > 2050) {
+                document.getElementById('future-indicator').classList.add('active');
+                document.body.setAttribute('data-time-period', 'future');
+            } else {
+                document.getElementById('present-indicator').classList.add('active');
+                document.body.setAttribute('data-time-period', 'present');
+            }
+            
+            // Change background based on time period
+            updateBackgroundEffect(position);
+        }
+        
+        // Content rewind/fast-forward functionality
+        const rewindButton = document.getElementById('rewind-button');
+        const forwardButton = document.getElementById('forward-button');
+        const articleContent = document.getElementById('article-content');
+        
+        rewindButton.addEventListener('click', function() {
+            articleContent.classList.add('rewinding');
+            setTimeout(() => {
+                articleContent.classList.remove('rewinding');
+            }, 1500);
+        });
+        
+        forwardButton.addEventListener('click', function() {
+            articleContent.classList.add('forwarding');
+            setTimeout(() => {
+                articleContent.classList.remove('forwarding');
+            }, 1500);
+        });
+        
+        // Easter egg timeline trigger
+        const timelineTrigger = document.getElementById('timeline-trigger');
+        const secretMessage = document.getElementById('secret-message');
+        
+        timelineTrigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            secretMessage.classList.toggle('visible');
+            
+            // Scramble text effect for the secret message
+            if (secretMessage.classList.contains('visible')) {
+                const scrambledText = document.getElementById('scrambled-message');
+                const originalText = scrambledText.textContent;
+                let iterations = 0;
+                
+                const interval = setInterval(() => {
+                    scrambledText.textContent = originalText
+                        .split('')
+                        .map((letter, index) => {
+                            if (index < iterations) {
+                                return originalText[index];
+                            }
+                            return Math.random() < 0.5 ? 
+                                Math.floor(Math.random() * 10) : 
+                                originalText[index];
+                        })
+                        .join('');
+                    
+                    if (iterations >= originalText.length) {
+                        clearInterval(interval);
+                    }
+                    
+                    iterations += 1 / 3;
+                }, 30);
+            }
+        });
+        
+        // Initialize Three.js background
+        let scene, camera, renderer, particles;
+        let timelineBg = document.getElementById('timeline-background');
+        
+        function initThreeJS() {
+            // Create scene
+            scene = new THREE.Scene();
+            
+            // Set up camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 50;
+            
+            // Set up renderer
+            renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            timelineBg.appendChild(renderer.domElement);
+            
+            // Create particles
+            const particleCount = 1000;
+            const particles = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+            
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                // Positions
+                positions[i] = (Math.random() - 0.5) * 200;
+                positions[i + 1] = (Math.random() - 0.5) * 200;
+                positions[i + 2] = (Math.random() - 0.5) * 200;
+                
+                // Colors (start with blue-ish)
+                colors[i] = 0.2 + Math.random() * 0.3; // R
+                colors[i + 1] = 0.2 + Math.random() * 0.3; // G
+                colors[i + 2] = 0.5 + Math.random() * 0.5; // B
+            }
+            
+            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            
+            const particleMaterial = new THREE.PointsMaterial({
+                size: 1,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.5
+            });
+            
+            const particleSystem = new THREE.Points(particles, particleMaterial);
+            scene.add(particleSystem);
+            
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                particleSystem.rotation.x += 0.0005;
+                particleSystem.rotation.y += 0.0005;
+                
+                renderer.render(scene, camera);
+            }
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+            
+            animate();
+        }
+        
+        // Initialize background effect
+        function updateBackgroundEffect(position) {
+            // Adjust the particle colors based on the timeline position
+            if (!scene) return;
+            
+            // Get the particles
+            const particles = scene.children[0];
+            const colors = particles.geometry.attributes.color.array;
+            
+            // Update colors based on position (0 = past/sepia, 0.5 = present/blue, 1 = future/purple)
+            for (let i = 0; i < colors.length; i += 3) {
+                if (position < 0.3) { // Past - sepia tones
+                    colors[i] = 0.6 + Math.random() * 0.4; // R (high)
+                    colors[i + 1] = 0.4 + Math.random() * 0.3; // G (medium)
+                    colors[i + 2] = 0.1 + Math.random() * 0.2; // B (low)
+                } else if (position > 0.7) { // Future - purple/cyan
+                    colors[i] = 0.3 + Math.random() * 0.3; // R
+                    colors[i + 1] = 0.1 + Math.random() * 0.2; // G
+                    colors[i + 2] = 0.7 + Math.random() * 0.3; // B (high)
+                } else { // Present - blue tones
+                    colors[i] = 0.1 + Math.random() * 0.2; // R
+                    colors[i + 1] = 0.4 + Math.random() * 0.3; // G
+                    colors[i + 2] = 0.6 + Math.random() * 0.4; // B
+                }
+            }
+            
+            particles.geometry.attributes.color.needsUpdate = true;
+        }
+        
+        // Initialize Three.js background if the element exists
+        if (timelineBg) {
+            initThreeJS();
+        }
+    });
+    </script>
+</body>
+</html>
