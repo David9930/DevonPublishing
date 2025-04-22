@@ -12,6 +12,74 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet">
     <!-- Tilt.js for 3D effect -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+    <!-- Fix for audio and visibility issues -->
+    <style>
+        /* Extra CSS to ensure overlay is initially hidden properly */
+        .self-destruct-overlay {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .self-destruct-overlay.active {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        /* Sound trigger button */
+        .sound-trigger {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: 1px solid #666;
+            padding: 8px 15px;
+            border-radius: 5px;
+            z-index: 1000;
+            font-family: 'Special Elite', monospace;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .sound-trigger:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        
+        /* Make the cta-button more visible */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #e74c3c;
+            color: white !important;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .cta-button i {
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover i {
+            transform: translateX(5px);
+        }
+    </style>
 </head>
 <body>
     <header class="site-header">
@@ -46,6 +114,11 @@
         <div class="countdown" id="countdown">00:45</div>
     </div>
 
+    <!-- Sound trigger button -->
+    <button class="sound-trigger" id="sound-trigger">
+        <i class="fas fa-volume-up"></i> Enable Sounds
+    </button>
+
     <!-- Self-destruct message overlay -->
     <div class="self-destruct-overlay" id="self-destruct-overlay">
         <div class="self-destruct-message">
@@ -71,7 +144,7 @@
                 <div class="profile-card" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
                     <div class="profile-header">
                         <div class="profile-img-wrapper">
-                            <img src="images/AuthorPhoto.jpg" alt="Author Photo" class="profile-image">
+                            <img src="images/iAuthorPhoto.jpg" alt="Author Photo" class="profile-image">
                             <div class="profile-badge">
                                 <i class="fas fa-pen-fancy"></i>
                                 <span>Potential Author in Training</span>
@@ -183,6 +256,11 @@
         </div>
     </footer>
 
+    <!-- Audio files for beeps -->
+    <audio id="beep-sound" preload="auto">
+        <source src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tAwAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAAElgCenp6enp6enp6enp6enp6enp6enp6enp6enp6enp6enp6enp6enp6enp6enp6enp6e//////////////////////////////////////////////////////////////////8AAAAATGF2YzU4LjEzAAAAAAAAAAAAAAAAJAVCAAAAAAAABJbyhWOFAAAAAAD/+xDEAAAIEAF59BAAITYBLz6CAAk9mXjYe4cAN7MzHw5g4YEaEhsV//8KQhCXj//4fwQBCEJjGPocHhQf/8QhMY/JBCEIT//+SBCEIP///wiBCEJikPqFIQhD/xCDih/5nE5/9QrlM6f3+WdPsjCH8KQ1v/73xHpBT/0/z5/9kBQoEfFJk8yQU/4oPqGCJlKFPCkP/kIbJBT/6uQ0//BCEIH//0BhoRQMBuYwGsE5brNrQtpRV9SstpPsL5t5aTOOTXt1dWNWq+r////6v+vgoMBA0GYCBoICgeCAYFAoXBQMDA4GBwQDAgEDEojFRmI7USREyeZPOqnp////+f//Sh4IwhCFIe5CEP+H/8FCMfLf/pYQh//+EIUIQg/5CEIUh///4hCEKQpCH/CEIOWcpTIKQ5iFQjnKE6IQhLznJgiFMQhCHIXzlOlIQpCFKZCEIQhSkKQpCFJiEIQhCEIQmIQhCYhCFJiEIQhCan/5CEITEJcOgsaJIKxTqwrEfH/QafQ/Q2qVZf//9f/f1/v6gQEAgIBwWEBAKBgJt8nfvweb//pb////pNhfqA38D/dCwAILOUCqCsUk8QDgIAhoVChPbktbUBc/9vp+kIYtIHUw5yH+2MOk5yCNj8gkAggBMEBAZABoR15YwFR+QCt+j//NiXCCx84QL4UcB/P//+t/QFsGBxgsQHw+///9OyGQOEgQ38RcgmH7eBxotdKXLOr0s8vV5JGkkZ6RTNWJG7SNP3s7Ox4a2t4YFZZ/2U6btodLI+5Th+VdkkbUnaSOQOcPyUdkkfUjBUZ4wN6I/FQRKAIxEM7UaDQlnwEKDQyMj7UekdnqRB0ZH5QdWe4NI+MUCiAUoDQrxiOTgVH55sXmQdGKB0ZJMX7PRj00FxfmRQPzTJizMizMxXmz0exQO0Fj9Bioa5a/TsqHu0G+bXc2vdv3/rf/P/+G9WE5F7jn5+JJ1iWwbk+4YIGdZr/+xDEFgALwOVpvalTQY6dLT7HqJhmAQ0yAZvmcPZOqbQNomShkwEIGEBAgNLTv1pVVlX/JLYYL+iOQTCHBh8RwgaIjkwUQIAiGC6RH///nwhYYfCj///////0PggCy1zrNkXUBTjgIrDShMjuuYcplpZKxpn5ZW0pXbSv0nWaRldb1//1zr3pOy+jZLxUcKjy4ePFX1bWp91qXcNLU1NLqTCKBYqFkGXKQW7uMkgmNAFGGDQRGgEjQCggMEAwhGARlwIwMIHQEmwKCAQCBURAL9UgyAAwCVgKAIwSAhhcMAQJvFxAgALhUjIoHQqDA4YeBO/2e/ZEGIAVFUxBDlL5DF9H/LQ5S+YUZTEQMp///5hT8wt5/8xBiFMKeFP/9//nK////yC0hURU89KUxCkMQUCYVAiAgn6huhgigaHCiCwiRQNDpQEz4NHvE03U0y7oRVSXd2LrK6nVUjVTx7tIyqv6rv//7P/r2+/Z//6f/LV/9e7++v9/pQKAQSDhQFAoXBAKAoEAoXAQECgMEBAQFAoFAQFAUDAQKgQEBAKCAsEDJIJDAYjVoXR5tQhT9QXR+FIU/MKYviDhT0Qfb9rX/VPxCj+Qcf/MQfzCn/pX//b+6///+/9P//8bB8K1n7S9JgwDlB5qHrKwxkcJ1nDTFu+vUaMaEMG3jKs11rRdXf///6gAX9QAGBQKA/8CBQGAQv1rMpzgCBQAAoFAgABQGAgFAf//8CD/rUFAYF///gTGLTxFG7//2vf/JfXVqvkFhQfwv4SzrLbMJl37NVWsyhPGcbcRRn//////0F/0Af1AYGBQKA//0AdAAqK7///BQGAoCBfoR6urVVQ2H923vbZMHDcvpuVsKvGdZiN2Y13KHIi2UOX////////8G/8AA6AAAABoA/uuf3vYxgBOCBEHwdCQ2CgWLQP/9QD9QHAQcBgIGQUBgGAgD//wIDQHAfDv//wJ7WiCHkv///+FHIYhCj/KQpPMKQpCHIYhCE8hCHIQn/lIQhiEP/+QpCEMQh//kKPTf//5xTEFNRTMuOTkuNVVVVVVVVVVVVVVVVVVV//sQxCCDywDpTPYeAAF2nS3ex6hgVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV" type="audio/mp3">
+    </audio>
+
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize tilt effect
@@ -245,43 +323,55 @@
             el.style.setProperty('--redaction-width', `${randomWidth}%`);
         });
 
-        // Make sure the overlay is initially hidden
+        // ===== FIXED SELF-DESTRUCT IMPLEMENTATION =====
+        
+        // Get elements
         const selfDestructOverlay = document.getElementById('self-destruct-overlay');
-        selfDestructOverlay.style.opacity = '0';
-        selfDestructOverlay.style.visibility = 'hidden';
-
-        // Self-destruct timer functionality
         const countdownElement = document.getElementById('countdown');
         const restartButton = document.getElementById('restart-button');
+        const soundTrigger = document.getElementById('sound-trigger');
+        const beepSound = document.getElementById('beep-sound');
+        
+        // Audio context and flag for sound enabled
+        let audioEnabled = false;
+        let audioContext = null;
+        
+        // Enable sound on button click
+        soundTrigger.addEventListener('click', function() {
+            audioEnabled = true;
+            soundTrigger.style.display = 'none';
+            
+            // Try to play the beep sound to ensure audio is enabled
+            try {
+                beepSound.play().then(() => {
+                    // Success - sound is working
+                    console.log("Sound enabled");
+                }).catch(err => {
+                    console.log("Error playing sound:", err);
+                });
+            } catch(e) {
+                console.log("Error with audio:", e);
+            }
+        });
+        
+        // Play beep function
+        function playBeep() {
+            if (audioEnabled) {
+                try {
+                    // Reset and play the sound
+                    beepSound.currentTime = 0;
+                    beepSound.play().catch(err => {
+                        console.log("Error playing beep:", err);
+                    });
+                } catch(e) {
+                    console.log("Error with beep playback:", e);
+                }
+            }
+        }
         
         // Set initial time (45 seconds)
         let timeLeft = 45;
         let countdownInterval;
-        let beepSound;
-        
-        // Create beep sound
-        function createBeepSound() {
-            try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                
-                return function playBeep() {
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-                    
-                    oscillator.type = 'square';
-                    oscillator.frequency.value = 800;
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    
-                    gainNode.gain.value = 0.1;
-                    oscillator.start();
-                    setTimeout(() => oscillator.stop(), 200);
-                };
-            } catch (e) {
-                console.log("Audio context not available");
-                return function() {};
-            }
-        }
         
         // Start the countdown
         function startCountdown() {
@@ -290,8 +380,8 @@
             countdownElement.textContent = '00:45';
             countdownElement.classList.remove('warning');
             
-            // Create beep sound function
-            beepSound = createBeepSound();
+            // Hide the overlay
+            selfDestructOverlay.classList.remove('active');
             
             // Clear any existing interval
             if (countdownInterval) {
@@ -304,6 +394,9 @@
         
         // Update countdown timer
         function updateCountdown() {
+            // Decrement the timer first
+            timeLeft--;
+            
             const minutes = Math.floor(timeLeft / 60);
             const seconds = timeLeft % 60;
             
@@ -311,18 +404,15 @@
             countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             
             // Play beep sound in last 5 seconds
-            if (timeLeft <= 5 && timeLeft > 0 && beepSound) {
-                beepSound();
+            if (timeLeft <= 5 && timeLeft > 0) {
+                playBeep();
                 
                 // Add warning class to flash timer
                 countdownElement.classList.add('warning');
             }
             
-            // Decrement the timer
-            timeLeft--;
-            
             // Check if time is up
-            if (timeLeft < 0) {
+            if (timeLeft <= 0) {
                 clearInterval(countdownInterval);
                 selfDestruct();
             }
@@ -330,12 +420,24 @@
         
         // Execute self-destruct
         function selfDestruct() {
+            // Force overlay to be visible
+            selfDestructOverlay.style.opacity = '1';
+            selfDestructOverlay.style.visibility = 'visible';
             selfDestructOverlay.classList.add('active');
+            
+            // Play a final beep
+            playBeep();
         }
         
         // Reset everything on restart
         restartButton.addEventListener('click', function() {
             selfDestructOverlay.classList.remove('active');
+            
+            // Force hide with inline styles
+            selfDestructOverlay.style.opacity = '0';
+            selfDestructOverlay.style.visibility = 'hidden';
+            
+            // Restart timer
             startCountdown();
         });
         
