@@ -39,6 +39,29 @@
         .enable-sound-button:hover {
             background-color: #c0392b;
         }
+        
+        /* Scroll notification */
+        .scroll-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: 'Special Elite', monospace;
+            z-index: 2000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .scroll-notification.visible {
+            display: block;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -78,6 +101,11 @@
     <button id="enable-sound-button" class="enable-sound-button">
         <i class="fas fa-volume-up"></i> Enable Countdown Beeps
     </button>
+
+    <!-- Scroll notification -->
+    <div class="scroll-notification" id="scroll-notification">
+        <i class="fas fa-volume-up"></i> Scroll detected - Beeps enabled!
+    </div>
 
     <!-- Self-destruct message overlay -->
     <div class="self-destruct-overlay" id="self-destruct-overlay">
@@ -278,16 +306,19 @@
             el.style.setProperty('--redaction-width', `${randomWidth}%`);
         });
 
-        // ===== SIMPLIFIED BEEP SOUND IMPLEMENTATION =====
+        // ===== ENHANCED BEEP SOUND IMPLEMENTATION WITH SCROLL TRIGGER =====
         
         // Get elements
         const selfDestructOverlay = document.getElementById('self-destruct-overlay');
         const countdownElement = document.getElementById('countdown');
         const restartButton = document.getElementById('restart-button');
         const enableSoundButton = document.getElementById('enable-sound-button');
+        const scrollNotification = document.getElementById('scroll-notification');
         
         // Sound enabled flag
         let soundEnabled = false;
+        let scrollDetected = false;
+        let scrollNotificationTimeout;
         
         // Create a simple beep function
         function playBeep() {
@@ -313,8 +344,8 @@
             }
         }
         
-        // Enable sound on button click
-        enableSoundButton.addEventListener('click', function() {
+        // Enable sound function
+        function enableSound() {
             soundEnabled = true;
             enableSoundButton.style.display = 'none';
             
@@ -322,6 +353,31 @@
             playBeep();
             
             console.log("Sound enabled");
+        }
+        
+        // Enable sound on button click
+        enableSoundButton.addEventListener('click', enableSound);
+        
+        // Enable sound on scroll (if not already enabled)
+        window.addEventListener('scroll', function() {
+            if (!scrollDetected && !soundEnabled) {
+                scrollDetected = true;
+                enableSound();
+                
+                // Show scroll notification
+                scrollNotification.classList.add('visible');
+                
+                // Hide notification after 3 seconds
+                if (scrollNotificationTimeout) {
+                    clearTimeout(scrollNotificationTimeout);
+                }
+                
+                scrollNotificationTimeout = setTimeout(() => {
+                    scrollNotification.classList.remove('visible');
+                }, 3000);
+                
+                console.log("Scroll detected - Sound enabled");
+            }
         });
         
         // Set initial time (45 seconds)
@@ -335,8 +391,13 @@
             countdownElement.textContent = '00:45';
             countdownElement.classList.remove('warning');
             
-            // Show sound button
-            enableSoundButton.style.display = 'block';
+            // Show sound button if sound not enabled yet
+            if (!soundEnabled) {
+                enableSoundButton.style.display = 'block';
+            }
+            
+            // Reset scroll detected flag
+            scrollDetected = false;
             
             // Hide the overlay
             selfDestructOverlay.style.opacity = '0';
