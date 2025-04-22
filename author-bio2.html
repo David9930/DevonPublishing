@@ -320,13 +320,20 @@
         let scrollDetected = false;
         let scrollNotificationTimeout;
         
+        // Create AudioContext ahead of time to fix mobile browser issues
+        let audioContext;
+        try {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        } catch (error) {
+            console.error("Could not create AudioContext:", error);
+        }
+        
         // Create a simple beep function
         function playBeep() {
-            if (!soundEnabled) return;
+            if (!soundEnabled || !audioContext) return;
             
             // Create a simple beep sound
             try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 const oscillator = audioContext.createOscillator();
                 const gainNode = audioContext.createGain();
                 
@@ -337,35 +344,56 @@
                 oscillator.connect(gainNode);
                 gainNode.connect(audioContext.destination);
                 
+                // Resume audio context if it was suspended (needed for some browsers)
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+                
                 oscillator.start();
                 setTimeout(() => oscillator.stop(), 200);
+                
+                console.log("Beep played successfully");
             } catch (error) {
                 console.error("Error playing beep:", error);
             }
         }
         
-        // Enable sound function
+        // Enable sound function with test sound
         function enableSound() {
+            console.log("Enabling sound...");
             soundEnabled = true;
             enableSoundButton.style.display = 'none';
             
-            // Play a test beep
-            playBeep();
-            
-            console.log("Sound enabled");
+            // For browsers that require user interaction to start audio
+            if (audioContext && audioContext.state === 'suspended') {
+                audioContext.resume().then(() => {
+                    console.log("AudioContext resumed");
+                    // Play a test beep after context is resumed
+                    setTimeout(playBeep, 100);
+                });
+            } else {
+                // Play a test beep
+                setTimeout(playBeep, 100);
+            }
         }
         
         // Enable sound on button click
-        enableSoundButton.addEventListener('click', enableSound);
+        enableSoundButton.addEventListener('click', function() {
+            enableSound();
+            console.log("Sound enabled via button");
+        });
         
         // Enable sound on scroll (if not already enabled)
-        window.addEventListener('scroll', function() {
+        let scrollHandler = function() {
             if (!scrollDetected && !soundEnabled) {
+                console.log("Scroll detected");
                 scrollDetected = true;
-                enableSound();
                 
-                // Show scroll notification
+                // Show scroll notification immediately
                 scrollNotification.classList.add('visible');
+                
+                // Enable sound
+                enableSound();
                 
                 // Hide notification after 3 seconds
                 if (scrollNotificationTimeout) {
@@ -376,9 +404,14 @@
                     scrollNotification.classList.remove('visible');
                 }, 3000);
                 
-                console.log("Scroll detected - Sound enabled");
+                console.log("Sound enabled via scroll");
+                
+                // Remove the scroll event listener after triggering once
+                window.removeEventListener('scroll', scrollHandler);
             }
-        });
+        };
+        
+        window.addEventListener('scroll', scrollHandler);
         
         // Set initial time (45 seconds)
         let timeLeft = 45;
@@ -394,10 +427,12 @@
             // Show sound button if sound not enabled yet
             if (!soundEnabled) {
                 enableSoundButton.style.display = 'block';
+                
+                // Reset scroll detected flag and re-add scroll listener
+                scrollDetected = false;
+                window.removeEventListener('scroll', scrollHandler);
+                window.addEventListener('scroll', scrollHandler);
             }
-            
-            // Reset scroll detected flag
-            scrollDetected = false;
             
             // Hide the overlay
             selfDestructOverlay.style.opacity = '0';
