@@ -3,6 +3,1245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Living with the Ghost of Sam | Blog</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@400;700&family=Special+Elite&family=VT323&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2a0b45;
+            --secondary-color: #7b1fa2;
+            --accent-color: #ff4081;
+            --highlight-color: #18ffff;
+            --dark-color: #121212;
+            --light-color: #f5f5f5;
+            --ghost-color: rgba(255, 255, 255, 0.2);
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --terminal-green: #4caf50;
+            --past-color: #a0522d;
+            --present-color: #2196f3;
+            --future-color: #9c27b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Particle background */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background-color: var(--ghost-color);
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Header Styles */
+        .site-header {
+            background-color: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid var(--secondary-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-branding {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .site-branding a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .main-navigation ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .main-navigation a {
+            color: var(--light-color);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .main-navigation a:hover {
+            color: var(--accent-color);
+        }
+
+        .main-navigation a.active {
+            color: var(--accent-color);
+        }
+
+        .main-navigation a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .main-navigation a:hover::after,
+        .main-navigation a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--light-color);
+        }
+
+        /* Hero Section */
+        .blog-hero {
+            height: 60vh;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+        }
+
+        .temporal-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(30, 144, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 144, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(45deg);
+            transform-origin: center bottom;
+            animation: gridPulse 15s infinite linear;
+        }
+
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.6; }
+        }
+
+        .hero-content {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(255, 64, 129, 0.5);
+            animation: glitchEffect 5s infinite;
+        }
+
+        @keyframes glitchEffect {
+            0%, 100% { text-shadow: 0 0 10px rgba(255, 64, 129, 0.5); }
+            25% { text-shadow: -2px 0 var(--accent-color), 2px 0 var(--highlight-color); }
+            26% { text-shadow: 0 0 10px rgba(255, 64, 129, 0.5); }
+            50% { text-shadow: 0 -2px var(--highlight-color), 0 2px var(--accent-color); }
+            51% { text-shadow: 0 0 10px rgba(255, 64, 129, 0.5); }
+            75% { text-shadow: 0.5px -0.5px var(--accent-color), -0.5px 0.5px var(--highlight-color); }
+            76% { text-shadow: 0 0 10px rgba(255, 64, 129, 0.5); }
+        }
+
+        .hero-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            color: var(--terminal-green);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: typewriter 3s steps(40) 1s forwards;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid var(--terminal-green);
+        }
+
+        @keyframes typewriter {
+            0% { width: 0; opacity: 1; }
+            100% { width: 100%; opacity: 1; }
+        }
+
+        .time-controller {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50px;
+            margin-top: 2rem;
+        }
+
+        .time-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            margin-right: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .time-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .time-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .time-dot.past {
+            background-color: var(--past-color);
+        }
+
+        .time-dot.present {
+            background-color: var(--present-color);
+        }
+
+        .time-dot.future {
+            background-color: var(--future-color);
+        }
+
+        .time-dot:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        .time-dot.active {
+            box-shadow: 0 0 15px currentColor;
+        }
+
+        /* Blog Content */
+        .blog-content {
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .time-indicator {
+            position: fixed;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 5;
+        }
+
+        .time-line {
+            width: 2px;
+            height: 50vh;
+            background: linear-gradient(to bottom, var(--past-color), var(--present-color), var(--future-color));
+            position: relative;
+        }
+
+        .time-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .time-marker:hover {
+            transform: translateX(-50%) scale(1.2);
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        .time-marker.past {
+            top: 15%;
+            background-color: var(--past-color);
+        }
+
+        .time-marker.present {
+            top: 50%;
+            background-color: var(--present-color);
+        }
+
+        .time-marker.future {
+            top: 85%;
+            background-color: var(--future-color);
+        }
+
+        .time-label {
+            position: absolute;
+            left: -60px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .time-marker:hover + .time-label {
+            opacity: 1;
+        }
+
+        .time-marker.past + .time-label {
+            top: 15%;
+            transform: translateY(-50%);
+            color: var(--past-color);
+        }
+
+        .time-marker.present + .time-label {
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--present-color);
+        }
+
+        .time-marker.future + .time-label {
+            top: 85%;
+            transform: translateY(-50%);
+            color: var(--future-color);
+        }
+
+        .blog-article {
+            background-color: rgba(18, 18, 18, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            overflow: hidden;
+            transition: all 0.5s ease;
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid rgba(123, 31, 162, 0.3);
+        }
+
+        .article-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .blog-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .ghost-text {
+            position: absolute;
+            font-family: 'Special Elite', cursive;
+            opacity: 0.1;
+            font-size: 8rem;
+            top: -2rem;
+            right: -1rem;
+            z-index: 1;
+            transform: rotate(-15deg);
+            color: var(--ghost-color);
+            user-select: none;
+        }
+
+        .category-tag {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            background-color: var(--accent-color);
+            color: var(--light-color);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-right: 0.5rem;
+        }
+
+        .article-body {
+            padding: 2rem;
+        }
+
+        .article-section {
+            margin-bottom: 2rem;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .article-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-heading {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .drop-cap {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-right: 8px;
+            color: var(--accent-color);
+        }
+
+        .highlight-box {
+            background: rgba(123, 31, 162, 0.1);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .highlight-quote {
+            font-family: 'Special Elite', cursive;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--light-color);
+            position: relative;
+            padding: 0 2rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-quote::before,
+        .highlight-quote::after {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            position: absolute;
+            opacity: 0.3;
+            color: var(--accent-color);
+        }
+
+        .highlight-quote::before {
+            left: 0;
+            top: -20px;
+        }
+
+        .highlight-quote::after {
+            right: 0;
+            bottom: -40px;
+        }
+
+        .timeline-card {
+            background: rgba(33, 33, 33, 0.8);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+            border-left: 4px solid var(--present-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-card.past {
+            border-left-color: var(--past-color);
+        }
+
+        .timeline-card.future {
+            border-left-color: var(--future-color);
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .timeline-date {
+            font-family: 'VT323', monospace;
+            color: var(--highlight-color);
+            font-size: 1rem;
+        }
+
+        .episode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .episode-card {
+            background: rgba(33, 33, 33, 0.8);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(123, 31, 162, 0.3);
+        }
+
+        .episode-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent-color);
+        }
+
+        .episode-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            position: relative;
+        }
+
+        .episode-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .episode-number {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: var(--accent-color);
+            color: var(--light-color);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .episode-content {
+            padding: 1.5rem;
+        }
+
+        .spoiler-warning {
+            background-color: rgba(255, 64, 129, 0.1);
+            border: 1px solid var(--accent-color);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .spoiler-icon {
+            margin-right: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .terminal-section {
+            background-color: #1d1e22;
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: 'VT323', monospace;
+            color: var(--terminal-green);
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(76, 175, 80, 0.3);
+            padding-bottom: 0.5rem;
+        }
+
+        .terminal-icon {
+            margin-right: 0.5rem;
+        }
+
+        .terminal-title {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .terminal-content {
+            position: relative;
+        }
+
+        .terminal-line {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .terminal-line::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background-color: var(--terminal-green);
+            animation: blink 1s infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .ghost-easter-egg {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .ghost-emoji {
+            font-size: 3rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: float-ghost 5s infinite ease-in-out;
+        }
+
+        @keyframes float-ghost {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-nav {
+            margin-bottom: 1rem;
+        }
+
+        .footer-nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: var(--light-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 1.5rem;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .footer-grid {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background-image: 
+                linear-gradient(to right, rgba(30, 144, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 144, 255, 0.05) 1px, transparent 1px);
+            background-size: 25px 25px;
+            transform: perspective(300px) rotateX(-45deg);
+            transform-origin: center top;
+            z-index: 1;
+        }
+
+        /* Media Queries */
+        @media (max-width: 992px) {
+            .time-indicator {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .blog-title {
+                font-size: 2rem;
+            }
+            
+            .ghost-text {
+                font-size: 5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .main-navigation {
+                width: 100%;
+            }
+            
+            .main-navigation ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .time-controller {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .blog-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .blog-title {
+                font-size: 1.8rem;
+            }
+            
+            .ghost-text {
+                font-size: 4rem;
+                top: -1rem;
+                right: -0.5rem;
+            }
+            
+            .episode-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle background -->
+    <div class="particle-container" id="particleContainer"></div>
+    
+    <!-- Ghost Easter Egg -->
+    <div class="ghost-easter-egg" id="ghostEgg">
+        <div class="ghost-emoji">👻</div>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="site-branding">
+                    <a href="index.html">Living with the Ghost of Sam</a>
+                </div>
+                <nav class="main-navigation">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="episodes.html">Episodes</a></li>
+                        <li><a href="characters.html">Characters</a></li>
+                        <li><a href="blog.html" class="active">Blog</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="blog-hero">
+        <div class="temporal-grid"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Ghost of Sam: Blog</h1>
+            <p class="hero-subtitle">Exploring the supernatural comedy series</p>
+            <div class="time-controller">
+                <span class="time-label">Timeline:</span>
+                <div class="time-dots">
+                    <div class="time-dot past" data-time="past"></div>
+                    <div class="time-dot present active" data-time="present"></div>
+                    <div class="time-dot future" data-time="future"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Indicator -->
+    <div class="time-indicator">
+        <div class="time-line">
+            <div class="time-marker past" data-section="section1"></div>
+            <div class="time-label">Episode 1</div>
+            <div class="time-marker present" data-section="section2"></div>
+            <div class="time-label">Episode 2</div>
+            <div class="time-marker future" data-section="section3"></div>
+            <div class="time-label">Key Moments</div>
+        </div>
+    </div>
+
+    <!-- Blog Content -->
+    <section class="blog-content">
+        <div class="container">
+            <article class="blog-article">
+                <div class="article-header">
+                    <div class="ghost-text">SAM</div>
+                    <div class="blog-meta">
+                        <div class="blog-date">
+                            <i class="fas fa-calendar-alt"></i> April 26, 2025
+                        </div>
+                        <div class="blog-categories">
+                            <span class="category-tag">Supernatural</span>
+                            <span class="category-tag">Comedy</span>
+                        </div>
+                    </div>
+                    <h2 class="blog-title">Living with the Ghost of Sam: A Supernatural Comedy Series</h2>
+                    <p>A unique blend of comedy and the supernatural, exploring the bizarre connection between Derek and his deceased comedian cousin.</p>
+                </div>
+
+                <div class="article-body">
+                    <div class="spoiler-warning">
+                        <i class="fas fa-exclamation-triangle spoiler-icon"></i>
+                        <strong>Spoiler Warning:</strong> This blog contains plot details from Episodes 1 & 2
+                    </div>
+
+                    <div class="article-section" id="section1">
+                        <h3 class="section-heading">The Premise</h3>
+                        <p><span class="drop-cap">B</span>ased on the provided excerpts from "Living with the Ghost of Sam" Episodes 1 and 2, the story centers around Derek Kinison, the cousin of the late comedian Sam Kinison, and his wife Nancy Hammond, as they unexpectedly find themselves embroiled in a supernatural competition to win ownership of a mysterious Victorian mansion with strong ties to Sam's final days.</p>
+                        
+                        <p>Derek experiences a dramatic corporate meltdown that mirrors his late cousin Sam Kinison's explosive comedic style, suggesting a spiritual awakening or influence. This event acts as a catalyst for Derek to question his superficial corporate life and reconnect with a long-dormant desire for change.</p>
+                        
+                        <div class="terminal-section">
+                            <div class="terminal-header">
+                                <i class="fas fa-terminal terminal-icon"></i>
+                                <span class="terminal-title">Temporal Observation System</span>
+                            </div>
+                            <div class="terminal-content">
+                                <div class="terminal-line">Monitoring subject: Derek Kinison</div>
+                                <div class="terminal-line">Genetic component: Confirmed</div>
+                                <div class="terminal-line">Timeline convergence probability: 87.3%</div>
+                                <div class="terminal-line">Status: Awakening sequence initiated<span class="terminal-cursor"></span></div>
+                            </div>
+                        </div>
+                        
+                        <p>As the story unfolds, supernatural occurrences begin to manifest, seemingly linked to Sam Kinison's ghost, including fleeting appearances in mirrors, self-activating objects (pipe organ, toaster, coffee maker), and unexplained weather phenomena like thunder in clear skies.</p>
+                        
+                        <div class="highlight-quote">
+                            "Changes have consequences, and consequences make change!"
+                        </div>
+                        
+                        <p>The competition is set when Derek and Nancy encounter social media influencers Chad Wellington and Marina St. Clair, who are also interested in buying the mansion. This setup creates a perfect stage for both comedy and supernatural encounters.</p>
+                    </div>
+                    
+                    <div class="timeline-card past" id="episode1">
+                        <div class="timeline-header">
+                            <h4 class="timeline-title">Episode 1: "Leap of Faith"</h4>
+                            <span class="timeline-date">TIMELINE: PAST</span>
+                        </div>
+                        <p>The journey begins with Derek's corporate meltdown and the discovery of Ravencrest Mansion, a weathered Victorian mansion with a history as a psychiatric hospital and later a comedy club called "The Laugh Asylum".</p>
+                        
+                        <div class="highlight-box">
+                            <h5><i class="fas fa-key"></i> Key Revelations:</h5>
+                            <p>Nancy initially finds a painting of the mansion, sparking Derek's memory of a past dream. They meet Linda Rhodes, a mysterious realtor with hidden knowledge about the mansion's history. A red pentagram painted on the foyer floor hints at darker elements. The discovery of a comedy book purportedly by Sam Kinison published the month he died. The previous owner of the mansion died on the same day as Sam.</p>
+                        </div>
+                        
+                        <p>A high-stakes overnight challenge is proposed by the current owner through Linda, with the winner being the one who lasts until dawn. This dramatic proposition raises the stakes and promises supernatural confrontations.</p>
+                    </div>
+                    
+                    <div class="article-section" id="section2">
+                        <h3 class="section-heading">The Competition Unfolds</h3>
+                        <p>Episode 2, "Night Moves," opens with a mysterious "Temporal Observation System" monitoring Derek's past, revealing early signs of a connection to Sam and a later meeting with Nancy. The system notes a "genetic component" and "timeline convergence probability," suggesting a predetermined link between the Kinison and Blackwood bloodlines.</p>
+                        
+                        <div class="timeline-card present" id="episode2">
+                            <div class="timeline-header">
+                                <h4 class="timeline-title">Episode 2: "Night Moves"</h4>
+                                <span class="timeline-date">TIMELINE: PRESENT</span>
+                            </div>
+                            <p>Derek and Nancy prepare for the overnight stay, gathering supplies and encountering Earl, a local shopkeeper with cryptic knowledge about the mansion's history, including its past as a comedy venue where Sam Kinison performed his last show on April 9th, 1992.</p>
+                            
+                            <div class="highlight-box">
+                                <h5><i class="fas fa-ghost"></i> Supernatural Escalation:</h5>
+                                <p>The mansion becomes more active as the night progresses. Sam's voice can be heard through various devices, and the mansion attempts to communicate through shifting images on a comedy poster. Meanwhile, Chad and Marina face personalized supernatural torments that expose the superficiality of their relationship through the mansion's mirrors.</p>
+                            </div>
+                            
+                            <p>While the influencers' relationship implodes under the supernatural pressure, Derek and Nancy's bond strengthens as they navigate the strange events together, showing genuine connection and support for each other.</p>
+                        </div>
+                        
+                        <p>The episode ends with Chad and Marina's hasty departure from the mansion, leaving Derek and Nancy as the apparent winners of the overnight challenge. They decide to stay and uncover the secrets of Ravencrest, with the final scene showing Sam's ghost seemingly approving of their presence.</p>
+                    </div>
+                    
+                    <div class="article-section" id="section3">
+                        <h3 class="section-heading">Key Moments Worth Watching</h3>
+                        <p>What makes "Living with the Ghost of Sam" truly compelling are the moments that blend humor, supernatural elements, and genuine emotion. Here are some standout scenes that capture the essence of the series:</p>
+                        
+                        <div class="episode-grid">
+                            <div class="episode-card">
+                                <div class="episode-header">
+                                    <span class="episode-number">Episode 1</span>
+                                    <h4 class="episode-title">Corporate Breakdown</h4>
+                                </div>
+                                <div class="episode-content">
+                                    <p>Derek's corporate meltdown channeling Sam Kinison's explosive comedic style immediately establishes the central premise – the bizarre connection between Derek and his deceased cousin – and promises a blend of humor and the uncanny.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="episode-card">
+                                <div class="episode-header">
+                                    <span class="episode-number">Episode 1</span>
+                                    <h4 class="episode-title">The Pentagram</h4>
+                                </div>
+                                <div class="episode-content">
+                                    <p>The discovery of the red pentagram and Linda's nervous reaction introduces a layer of mystery and potential darkness to the mansion's history, hinting at more than just ghostly comedy.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="episode-card">
+                                <div class="episode-header">
+                                    <span class="episode-number">Episode 2</span>
+                                    <h4 class="episode-title">Ghostly Critics</h4>
+                                </div>
+                                <div class="episode-content">
+                                    <p>The personalized supernatural torments of Chad and Marina involving ghostly comedians in the mirrors offer a unique blend of humor, horror, and social commentary, showcasing the series' potential for creative supernatural sequences.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="episode-card">
+                                <div class="episode-header">
+                                    <span class="episode-number">Episode 2</span>
+                                    <h4 class="episode-title">Sam's Approval</h4>
+                                </div>
+                                <div class="episode-content">
+                                    <p>The final shot of Sam's ghost seemingly approving of Derek and Nancy indicates that the mansion and its ghostly inhabitant have a specific purpose for them, suggesting a larger narrative arc beyond just winning a house.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="terminal-section">
+                        <div class="terminal-header">
+                            <i class="fas fa-terminal terminal-icon"></i>
+                            <span class="terminal-title">Timeline Analysis</span>
+                        </div>
+                        <div class="terminal-content">
+                            <div class="terminal-line">Sam Kinison DOD: April 10, 1992</div>
+                            <div class="terminal-line">Last Performance: The Laugh Asylum, April 9, 1992</div>
+                            <div class="terminal-line">Ravencrest Owner DOD: April 10, 1992</div>
+                            <div class="terminal-line">Timeline inconsistency detected: Historical records show no performance on this date</div>
+                            <div class="terminal-line">Conclusion: Reality breach confirmed<span class="terminal-cursor"></span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="article-section" id="conclusion">
+                        <h3 class="section-heading">Why You Should Watch</h3>
+                        <p>Ultimately, "Living with the Ghost of Sam" offers a unique blend of comedic and supernatural elements, driven by the intriguing mystery surrounding Sam Kinison's connection to Ravencrest Mansion. The series promises to explore themes of destiny, the search for authenticity, and the complexities of relationships, all while delivering humorous and spooky encounters with the spirit world.</p>
+                        
+                        <p>The dynamic between Derek and Nancy, as they navigate these bizarre events, provides a compelling human element to the fantastical premise. Their genuine connection stands in stark contrast to the superficial relationship of Chad and Marina, highlighting the show's message about authenticity in a world of facades.</p>
+                        
+                        <div class="highlight-quote">
+                            "The past leaves echoes. Some louder than others. Some funny. Some tragic. All connected."
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid"></div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Living with the Ghost of Sam</div>
+                <nav class="footer-nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="episodes.html">Episodes</a></li>
+                        <li><a href="characters.html">Characters</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="copyright">
+                    <p>&copy; 2025 All Rights Reserved | Developed by <a href="#" id="easterEggTrigger">Your Studio</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Create particles for the background
+        document.addEventListener('DOMContentLoaded', function() {
+            const particleContainer = document.getElementById('particleContainer');
+            const particleCount = 100;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random positions
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const size = Math.random() * 4 + 1;
+                const opacity = Math.random() * 0.5 + 0.2;
+                const delay = Math.random() * 10;
+                const duration = Math.random() * 10 + 10;
+                
+                // Apply styles
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.opacity = opacity;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // Add to container
+                particleContainer.appendChild(particle);
+            }
+            
+            // Intersection Observer for fade-in effect
+            const sections = document.querySelectorAll('.article-section');
+            const options = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, options);
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Timeline dots functionality
+            const timeDots = document.querySelectorAll('.time-dot');
+            timeDots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    // Remove active class from all dots
+                    timeDots.forEach(d => d.classList.remove('active'));
+                    
+                    // Add active class to clicked dot
+                    this.classList.add('active');
+                    
+                    // Get time period
+                    const timePeriod = this.getAttribute('data-time');
+                    
+                    // Update body attribute for CSS changes
+                    document.body.setAttribute('data-time-period', timePeriod);
+                    
+                    // Change particles color based on time period
+                    const particles = document.querySelectorAll('.particle');
+                    particles.forEach(particle => {
+                        particle.classList.remove('past', 'present', 'future');
+                        particle.classList.add(timePeriod);
+                    });
+                });
+            });
+            
+            // Timeline markers functionality
+            const timeMarkers = document.querySelectorAll('.time-marker');
+            timeMarkers.forEach(marker => {
+                marker.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-section');
+                    const section = document.getElementById(sectionId);
+                    
+                    if (section) {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+            
+            // Ghost Easter Egg
+            const ghostEgg = document.getElementById('ghostEgg');
+            const easterEggTrigger = document.getElementById('easterEggTrigger');
+            
+            easterEggTrigger.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Position ghost randomly
+                const posX = Math.random() * 80 + 10;
+                const posY = Math.random() * 60 + 20;
+                
+                ghostEgg.style.left = `${posX}%`;
+                ghostEgg.style.top = `${posY}%`;
+                ghostEgg.style.opacity = '1';
+                
+                // Hide after 3 seconds
+                setTimeout(() => {
+                    ghostEgg.style.opacity = '0';
+                }, 3000);
+            });
+            
+            // Random ghost appearances
+            setInterval(() => {
+                if (Math.random() > 0.97) { // 3% chance of ghost appearing
+                    const posX = Math.random() * 80 + 10;
+                    const posY = Math.random() * 60 + 20;
+                    
+                    ghostEgg.style.left = `${posX}%`;
+                    ghostEgg.style.top = `${posY}%`;
+                    ghostEgg.style.opacity = '1';
+                    
+                    setTimeout(() => {
+                        ghostEgg.style.opacity = '0';
+                    }, 2000);
+                }
+            }, 10000);
+            
+            // Mobile menu toggle
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const mainNav = document.querySelector('.main-navigation');
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', () => {
+                    mainNav.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog | Devon Publishing LLC</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/blog.css">
