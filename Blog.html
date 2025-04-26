@@ -3,1255 +3,717 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Living with the Ghost of Sam | Blog</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@400;700&family=Special+Elite&family=VT323&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <title>A Letter Guide For Rebecca - The Journey Behind the Mystery</title>
     <style>
         :root {
-            --primary-color: #333;
-            --secondary-color: #9c27b0;
-            --accent-color: #ff4081;
-            --highlight-color: #00e5ff;
-            --dark-color: #121212;
-            --light-color: #ffffff;
-            --ghost-color: rgba(255, 255, 255, 0.2);
-            --shadow-color: rgba(0, 0, 0, 0.5);
-            --terminal-green: #4caf50;
-            --past-color: #ff9800;
-            --present-color: #2196f3;
-            --future-color: #e040fb;
-            --text-color: #ffffff;
-            --card-bg: rgba(30, 30, 30, 0.95);
-            --highlight-bg: rgba(156, 39, 176, 0.2);
+            --primary: #1a3a5f;
+            --secondary: #f8ae4b;
+            --accent: #d64933;
+            --background: #f9f9f9;
+            --text: #333;
+            --light-text: #777;
+            --transition: all 0.3s ease;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--dark-color);
-            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
             overflow-x: hidden;
-            position: relative;
-            font-size: 16px;
-            font-weight: 400;
         }
-
-        /* Particle background */
-        .particle-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            border-radius: 50%;
-            background-color: var(--ghost-color);
-            animation: float 15s infinite linear;
-            opacity: 0.3;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.8;
-            }
-            90% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Header Styles */
-        .site-header {
-            background-color: rgba(25, 25, 25, 0.97);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            border-bottom: 1px solid var(--secondary-color);
-        }
-
+        
         .container {
-            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 0;
+            padding: 0 20px;
         }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .site-branding {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #333;
-        }
-
-        .site-branding a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .main-navigation ul {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        .main-navigation a {
-            color: var(--light-color);
-            text-decoration: none;
-            padding: 0.5rem 0;
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 2rem 0;
             position: relative;
-            transition: color 0.3s;
+            overflow: hidden;
         }
-
-        .main-navigation a:hover {
-            color: var(--accent-color);
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
         }
-
-        .main-navigation a.active {
-            color: var(--accent-color);
+        
+        .header-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
         }
-
-        .main-navigation a::after {
+        
+        .header-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            max-width: 800px;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            clip-path: polygon(70% 0, 100% 0, 100% 100%, 50% 100%);
+        }
+        
+        .main-content {
+            padding: 4rem 0;
+        }
+        
+        .article-meta {
+            margin-bottom: 2rem;
+            color: var(--light-text);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .article-author {
+            margin-right: 2rem;
+            font-weight: 500;
+        }
+        
+        .article-date {
+            font-style: italic;
+        }
+        
+        .article-tags {
+            margin-left: auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background-color: #eee;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            margin-left: 0.5rem;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+        
+        .tag:hover {
+            background-color: var(--secondary);
+            color: white;
+            cursor: pointer;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin: 2rem 0 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        h2::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent-color);
-            transition: width 0.3s ease;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
         }
-
-        .main-navigation a:hover::after,
-        .main-navigation a.active::after {
-            width: 100%;
+        
+        h3 {
+            font-size: 1.8rem;
+            margin: 1.8rem 0 1rem;
+            color: var(--primary);
         }
-
-        .mobile-menu-toggle {
-            display: none;
-            cursor: pointer;
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .pullquote {
             font-size: 1.5rem;
-            color: var(--light-color);
+            line-height: 1.4;
+            font-style: italic;
+            color: var(--primary);
+            border-left: 5px solid var(--secondary);
+            padding-left: 1.2rem;
+            margin: 2rem 0;
         }
-
-        /* Hero Section */
-        .blog-hero {
-            height: 60vh;
+        
+        .character-section {
+            margin: 3rem 0;
+        }
+        
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .character-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: var(--transition);
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, #333, #121212);
         }
-
-        .temporal-grid {
+        
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .character-card::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 5px;
             height: 100%;
-            background-image: 
-                linear-gradient(to right, rgba(30, 144, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(30, 144, 255, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            transform: perspective(500px) rotateX(45deg);
-            transform-origin: center bottom;
-            animation: gridPulse 15s infinite linear;
+            background-color: var(--secondary);
         }
-
-        @keyframes gridPulse {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 0.6; }
+        
+        .character-name {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
         }
-
-        .hero-content {
-            position: relative;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            z-index: 2;
-            padding: 2rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+        
+        .character-description {
+            font-size: 0.95rem;
+            color: var(--light-text);
         }
-
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-            text-shadow: 0 0 10px rgba(255, 64, 129, 0.5);
-            animation: glitchEffect 5s infinite;
-            color: #fff;
-        }
-
-        @keyframes glitchEffect {
-            0%, 100% { text-shadow: 0 0 10px rgba(255, 64, 129, 0.5); }
-            25% { text-shadow: -2px 0 var(--accent-color), 2px 0 var(--highlight-color); }
-            26% { text-shadow: 0 0 10px rgba(255, 64, 129, 0.5); }
-            50% { text-shadow: 0 -2px var(--highlight-color), 0 2px var(--accent-color); }
-            51% { text-shadow: 0 0 10px rgba(255, 64, 129, 0.5); }
-            75% { text-shadow: 0.5px -0.5px var(--accent-color), -0.5px 0.5px var(--highlight-color); }
-            76% { text-shadow: 0 0 10px rgba(255, 64, 129, 0.5); }
-        }
-
-        .hero-subtitle {
-            font-family: 'VT323', monospace;
-            font-size: 1.5rem;
-            color: #6dff6d;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: typewriter 3s steps(40) 1s forwards;
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 2px solid #6dff6d;
-            text-shadow: 0 0 5px rgba(109, 255, 109, 0.5);
-        }
-
-        @keyframes typewriter {
-            0% { width: 0; opacity: 1; }
-            100% { width: 100%; opacity: 1; }
-        }
-
-        .time-controller {
-            display: flex;
-            align-items: center;
-            padding: 0.5rem 1rem;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 50px;
-            margin-top: 2rem;
-            border: 1px solid rgba(156, 39, 176, 0.5);
-        }
-
-        .time-label {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            margin-right: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .time-dots {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .time-dot {
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .time-dot.past {
-            background-color: var(--past-color);
-        }
-
-        .time-dot.present {
-            background-color: var(--present-color);
-        }
-
-        .time-dot.future {
-            background-color: var(--future-color);
-        }
-
-        .time-dot:hover {
-            transform: scale(1.2);
-            box-shadow: 0 0 10px currentColor;
-        }
-
-        .time-dot.active {
-            box-shadow: 0 0 15px currentColor;
-        }
-
-        /* Blog Content */
-        .blog-content {
-            padding: 4rem 0;
+        
+        .timeline-section {
+            margin: 4rem 0;
             position: relative;
         }
-
-        .time-indicator {
-            position: fixed;
-            left: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            z-index: 5;
-        }
-
-        .time-line {
-            width: 2px;
-            height: 50vh;
-            background: linear-gradient(to bottom, var(--past-color), var(--present-color), var(--future-color));
+        
+        .timeline {
             position: relative;
+            margin: 3rem 0;
         }
-
-        .time-marker {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .time-marker:hover {
-            transform: translateX(-50%) scale(1.2);
-            box-shadow: 0 0 10px currentColor;
-        }
-
-        .time-marker.past {
-            top: 15%;
-            background-color: var(--past-color);
-        }
-
-        .time-marker.present {
-            top: 50%;
-            background-color: var(--present-color);
-        }
-
-        .time-marker.future {
-            top: 85%;
-            background-color: var(--future-color);
-        }
-
-        .time-label {
-            position: absolute;
-            left: -60px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .time-marker:hover + .time-label {
-            opacity: 1;
-        }
-
-        .time-marker.past + .time-label {
-            top: 15%;
-            transform: translateY(-50%);
-            color: var(--past-color);
-        }
-
-        .time-marker.present + .time-label {
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--present-color);
-        }
-
-        .time-marker.future + .time-label {
-            top: 85%;
-            transform: translateY(-50%);
-            color: var(--future-color);
-        }
-
-        .blog-article {
-            background-color: rgba(25, 25, 25, 0.95);
-            border-radius: 10px;
-            box-shadow: 0 10px 30px var(--shadow-color);
-            overflow: hidden;
-            transition: all 0.5s ease;
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
-            border: 1px solid rgba(156, 39, 176, 0.5);
-        }
-
-        .article-header {
-            padding: 2rem;
-            background: linear-gradient(135deg, #333, #666);
-            color: #ffffff;
-            position: relative;
-            overflow: hidden;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .blog-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .blog-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
-        .ghost-text {
-            position: absolute;
-            font-family: 'Special Elite', cursive;
-            opacity: 0.1;
-            font-size: 8rem;
-            top: -2rem;
-            right: -1rem;
-            z-index: 1;
-            transform: rotate(-15deg);
-            color: var(--ghost-color);
-            user-select: none;
-        }
-
-        .category-tag {
-            display: inline-block;
-            padding: 0.25rem 1rem;
-            background-color: var(--accent-color);
-            color: var(--light-color);
-            border-radius: 50px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-right: 0.5rem;
-        }
-
-        .article-body {
-            padding: 2rem;
-        }
-
-        .article-section {
-            margin-bottom: 2rem;
-            position: relative;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .article-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-heading {
-            font-family: 'Playfair Display', serif;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-heading::after {
+        
+        .timeline::before {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background-color: var(--accent-color);
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background-color: #eee;
         }
-
-        .drop-cap {
-            float: left;
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            line-height: 0.8;
-            padding-right: 8px;
-            color: var(--accent-color);
-        }
-
-        .highlight-box {
-            background: rgba(156, 39, 176, 0.15);
-            border-left: 4px solid var(--secondary-color);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0 5px 5px 0;
-            color: #f0f0f0;
-        }
-
-        .highlight-quote {
-            font-family: 'Special Elite', cursive;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #ffffff;
+        
+        .timeline-item {
             position: relative;
-            padding: 0 2rem;
-            margin: 2rem 0;
-            text-shadow: 0 0 5px rgba(255, 64, 129, 0.5);
+            margin-bottom: 3rem;
         }
-
-        .highlight-quote::before,
-        .highlight-quote::after {
-            content: '"';
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
+        
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 30px);
+        }
+        
+        .timeline-item:nth-child(even) {
+            padding-left: calc(50% + 30px);
+        }
+        
+        .timeline-dot {
             position: absolute;
-            opacity: 0.3;
-            color: var(--accent-color);
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background-color: var(--secondary);
+            border-radius: 50%;
         }
-
-        .highlight-quote::before {
-            left: 0;
-            top: -20px;
-        }
-
-        .highlight-quote::after {
-            right: 0;
-            bottom: -40px;
-        }
-
-        .timeline-card {
-            background: rgba(30, 30, 30, 0.95);
-            border-radius: 8px;
+        
+        .timeline-content {
+            background-color: white;
             padding: 1.5rem;
-            margin: 2rem 0;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             position: relative;
-            border-left: 4px solid var(--present-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
         }
-
-        .timeline-card.past {
-            border-left-color: var(--past-color);
+        
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 10px;
         }
-
-        .timeline-card.future {
-            border-left-color: var(--future-color);
+        
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -10px;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid white;
         }
-
-        .timeline-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -10px;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 10px solid white;
         }
-
-        .timeline-header {
+        
+        .timeline-title {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+        
+        .timeline-text {
+            font-size: 0.95rem;
+        }
+        
+        .faq-section {
+            margin: 4rem 0;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1.5rem;
+        }
+        
+        .faq-question {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
         }
-
-        .timeline-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            margin: 0;
-        }
-
-        .timeline-date {
-            font-family: 'VT323', monospace;
-            color: var(--highlight-color);
-            font-size: 1rem;
-        }
-
-        .episode-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .episode-card {
-            background: rgba(30, 30, 30, 0.95);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(156, 39, 176, 0.5);
-        }
-
-        .episode-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-            border-color: var(--accent-color);
-        }
-
-        .episode-header {
-            padding: 1.5rem;
-            background: linear-gradient(135deg, #333, #666);
-            position: relative;
-            color: #ffffff;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .episode-title {
-            font-family: 'Playfair Display', serif;
+        
+        .faq-question::after {
+            content: '+';
             font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            transition: var(--transition);
         }
-
-        .episode-number {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background-color: var(--accent-color);
-            color: var(--light-color);
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-family: 'Orbitron', sans-serif;
-            margin-bottom: 0.5rem;
-        }
-
-        .episode-content {
-            padding: 1.5rem;
-        }
-
-        .spoiler-warning {
-            background-color: rgba(255, 64, 129, 0.15);
-            border: 1px solid var(--accent-color);
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 2rem 0;
-            text-align: center;
-            position: relative;
-            color: #ffffff;
-            font-weight: 500;
-        }
-
-        .spoiler-icon {
-            margin-right: 0.5rem;
-            color: var(--accent-color);
-        }
-
-        .terminal-section {
-            background-color: #0a0a0a;
-            border-radius: 8px;
-            padding: 1.5rem;
-            font-family: 'VT323', monospace;
-            color: #6dff6d;
-            margin: 2rem 0;
-            position: relative;
+        
+        .faq-answer {
+            max-height: 0;
             overflow: hidden;
-            border: 1px solid #333333;
+            transition: var(--transition);
         }
-
-        .terminal-header {
-            display: flex;
-            align-items: center;
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            margin-top: 1rem;
+        }
+        
+        .faq-item.active .faq-question::after {
+            content: '-';
+        }
+        
+        .call-to-action {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin: 4rem 0 2rem;
+            border-radius: 10px;
+        }
+        
+        .cta-title {
+            font-size: 2rem;
             margin-bottom: 1rem;
-            border-bottom: 1px solid rgba(76, 175, 80, 0.3);
+        }
+        
+        .cta-text {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 2px solid var(--secondary);
+        }
+        
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--secondary);
+        }
+        
+        .footer {
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--light-text);
+        }
+        
+        /* Interactive elements */
+        .interactive-tabs {
+            margin: 3rem 0;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            margin-bottom: 1rem;
+            overflow-x: auto;
             padding-bottom: 0.5rem;
         }
-
-        .terminal-icon {
-            margin-right: 0.5rem;
-        }
-
-        .terminal-title {
+        
+        .tab-button {
+            padding: 0.8rem 1.5rem;
+            background-color: #eee;
+            border: none;
+            cursor: pointer;
             font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            transition: var(--transition);
+            margin-right: 0.5rem;
+            border-radius: 5px 5px 0 0;
         }
-
-        .terminal-content {
-            position: relative;
+        
+        .tab-button.active {
+            background-color: var(--primary);
+            color: white;
         }
-
-        .terminal-line {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1rem;
+        
+        .tab-content {
+            display: none;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0 5px 5px 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
-
-        .terminal-line::before {
-            content: '>';
-            position: absolute;
-            left: 0;
-            color: var(--accent-color);
+        
+        .tab-content.active {
+            display: block;
         }
-
-        .terminal-cursor {
-            display: inline-block;
-            width: 8px;
-            height: 15px;
-            background-color: var(--terminal-green);
-            animation: blink 1s infinite;
-            vertical-align: middle;
-            margin-left: 2px;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        .ghost-easter-egg {
-            position: fixed;
-            pointer-events: none;
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-
-        .ghost-emoji {
-            font-size: 3rem;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            animation: float-ghost 5s infinite ease-in-out;
-        }
-
-        @keyframes float-ghost {
-            0%, 100% { transform: translateY(0) rotate(-5deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-
-        .footer {
-            background-color: var(--dark-color);
-            color: var(--light-color);
-            text-align: center;
-            padding: 2rem 0;
-            border-top: 1px solid var(--secondary-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .footer-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .footer-nav {
-            margin-bottom: 1rem;
-        }
-
-        .footer-nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-nav a {
-            color: var(--light-color);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-nav a:hover {
-            color: var(--accent-color);
-        }
-
-        .footer-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            font-size: 1.5rem;
-        }
-
-        .copyright {
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-
-        .footer-grid {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 30%;
-            background-image: 
-                linear-gradient(to right, rgba(30, 144, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(30, 144, 255, 0.05) 1px, transparent 1px);
-            background-size: 25px 25px;
-            transform: perspective(300px) rotateX(-45deg);
-            transform-origin: center top;
-            z-index: 1;
-        }
-
-        /* Media Queries */
-        @media (max-width: 992px) {
-            .time-indicator {
-                display: none;
-            }
-            
-            .hero-title {
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .header-title {
                 font-size: 2.5rem;
             }
             
-            .blog-title {
-                font-size: 2rem;
-            }
-            
-            .ghost-text {
-                font-size: 5rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-            
-            .main-navigation {
-                width: 100%;
-            }
-            
-            .main-navigation ul {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            
-            .hero-title {
-                font-size: 2rem;
-            }
-            
-            .hero-subtitle {
+            .header-subtitle {
                 font-size: 1.2rem;
             }
             
-            .time-controller {
-                flex-direction: column;
-                gap: 1rem;
+            .timeline::before {
+                left: 30px;
             }
             
-            .blog-meta {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
+            .timeline-item:nth-child(odd), .timeline-item:nth-child(even) {
+                padding-left: 80px;
+                padding-right: 0;
             }
             
-            .blog-title {
-                font-size: 1.8rem;
+            .timeline-dot {
+                left: 30px;
             }
             
-            .ghost-text {
-                font-size: 4rem;
-                top: -1rem;
-                right: -0.5rem;
+            .timeline-item:nth-child(odd) .timeline-content::before {
+                left: -10px;
+                right: auto;
+                border-left: none;
+                border-right: 10px solid white;
             }
             
-            .episode-grid {
-                grid-template-columns: 1fr;
+            .article-tags {
+                margin-left: 0;
+                margin-top: 1rem;
+                width: 100%;
             }
             
-            .footer-nav ul {
-                flex-direction: column;
-                gap: 0.5rem;
+            .tag {
+                margin-left: 0;
+                margin-right: 0.5rem;
+                margin-bottom: 0.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Particle background -->
-    <div class="particle-container" id="particleContainer"></div>
-    
-    <!-- Ghost Easter Egg -->
-    <div class="ghost-easter-egg" id="ghostEgg">
-        <div class="ghost-emoji">👻</div>
-    </div>
-
-    <!-- Header -->
-    <header class="site-header">
-        <div class="container">
-            <div class="header-content">
-                <div class="site-branding">
-                    <a href="index.html">Devon Publishing LLC</a>
-                </div>
-                <nav class="main-navigation">
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="where-to-buy.html">Where To Buy</a></li>
-                        <li><a href="bookbio.html">Book Bio</a></li>
-                        <li><a href="author-bio.html">Author Bio</a></li>
-                        <li><a href="blog.html" class="active">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </nav>
-                <div class="mobile-menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </div>
+    <header>
+        <div class="header-bg"></div>
+        <div class="container header-content">
+            <h1 class="header-title">A Letter Guide For Rebecca</h1>
+            <p class="header-subtitle">A journey through time, memory, and the choices that shape our reality</p>
         </div>
     </header>
-
-    <!-- Hero Section -->
-    <section class="blog-hero">
-        <div class="temporal-grid"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">Living with the Ghost of Sam</h1>
-            <p class="hero-subtitle">Exploring the supernatural comedy series</p>
-            <div class="time-controller">
-                <span class="time-label">Timeline:</span>
-                <div class="time-dots">
-                    <div class="time-dot past" data-time="past"></div>
-                    <div class="time-dot present active" data-time="present"></div>
-                    <div class="time-dot future" data-time="future"></div>
+    
+    <main class="container main-content">
+        <div class="article-meta">
+            <div class="article-author">By Derek Devon</div>
+            <div class="article-date">April 26, 2025</div>
+            <div class="article-tags">
+                <span class="tag">Fiction</span>
+                <span class="tag">Science Fiction</span>
+                <span class="tag">Time Travel</span>
+            </div>
+        </div>
+        
+        <p>In the quiet moments before setting sail on my Morgan Out Island for a circumnavigation, I find myself reflecting on the journey that led to writing "A Letter Guide For Rebecca." What began as personal reflections—a desire to capture precious moments from my past—evolved into something far more complex and extraordinary.</p>
+        
+        <p>This novel explores the boundaries between reality and possibility, weaving together the threads of love, regret, and the profound desire for second chances. It poses questions about the nature of time, memory, and the ripple effects of our choices across the fabric of existence.</p>
+        
+        <div class="pullquote">
+            "You are about to discover how far-reaching those choices I made have changed the world as 'we' could have known it and how I used to know it. You're the sole keeper of this knowledge now."
+        </div>
+        
+        <h2>The World of "A Letter Guide For Rebecca"</h2>
+        
+        <p>At its core, the novel is a personal confession from Derek Devon to Rebecca, his "it-girl" and the "love of his lives." Through the format of a two-volume guide, Derek reveals the extraordinary truth behind his seemingly uncanny abilities to predict future events—not luck, but knowledge gained from having lived through time before.</p>
+        
+        <p>The narrative shifts between Derek's present (as he prepares for his sailing circumnavigation in his 60s) and his past as a young man, particularly around age 12-13 and later in high school. Readers are invited to unravel the mystery of how an adult consciousness found itself re-implanted in a younger body, and the ethical dilemmas that arise from possessing knowledge of future events.</p>
+        
+        <div class="interactive-tabs">
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="openTab(event, 'tab1')">The Premise</button>
+                <button class="tab-button" onclick="openTab(event, 'tab2')">The Science Fiction Elements</button>
+                <button class="tab-button" onclick="openTab(event, 'tab3')">The Love Story</button>
+            </div>
+            
+            <div id="tab1" class="tab-content active">
+                <h3>A Second Chance at Life</h3>
+                <p>Derek Devon has been given a remarkable opportunity—a "do-over" that allows him to relive his life from the age of 12, armed with the memories and wisdom of his adult self. This premise creates a fascinating exploration of how foreknowledge might be both a blessing and a burden.</p>
+                <p>As Derek navigates his second chance at adolescence, he must constantly weigh the consequences of his actions. Should he use his knowledge to prevent tragedies? To accumulate wealth? To win the heart of Rebecca earlier? Or would such interventions have unintended ripple effects across the timeline?</p>
+                <p>The novel explores these questions through Derek's candid reflections in his letter guide, creating a deeply personal account of an extraordinary circumstance.</p>
+            </div>
+            
+            <div id="tab2" class="tab-content">
+                <h3>Beyond Conventional Reality</h3>
+                <p>While grounded in real locations and experiences, the novel incorporates elements that transcend conventional understanding. Derek's encounters with beings from the future, discussions about nanotechnology capable of manipulating cells at a microscopic level, and references to a "Prime Directive" all suggest a narrative that ventures beyond everyday reality.</p>
+                <p>These science fiction elements serve not merely as plot devices but as vehicles to explore profound questions about free will, determinism, and the nature of consciousness itself. Derek's interactions with voices he names Morpheus, Trinity, and Cypher (a nod to "The Matrix") provide a framework for examining these philosophical questions through a contemporary lens.</p>
+                <p>The novel's concept of "brain dumps" and timeline alterations challenges readers to reconsider their understanding of time as linear and fixed.</p>
+            </div>
+            
+            <div id="tab3" class="tab-content">
+                <h3>The Heart of the Story</h3>
+                <p>At its emotional core, "A Letter Guide For Rebecca" is a love story—one that spans multiple versions of reality. Derek's deep and enduring affection for Rebecca drives many of his actions and choices throughout his "do-over" life.</p>
+                <p>From their first skinny dipping experience at Hermitage Pond to the small moments of connection shared throughout their lives, the novel celebrates the persistence of love across time and circumstance. Derek remembers the exact moment he thought, "You're going to marry her one day, Mrs. Rebecca Devon," revealing how central she is to his motivation.</p>
+                <p>The novel asks whether love is merely a product of chemical reactions in the brain, as Tank suggests when discussing the origin of Derek's "butterflies" feeling for Rebecca, or something more transcendent that can survive even the most radical alterations to reality.</p>
+            </div>
+        </div>
+        
+        <h2>The Key Characters</h2>
+        
+        <p>The world of "A Letter Guide For Rebecca" is populated by a rich cast of characters, each playing a role in Derek's journey through his altered timeline. Here are some of the most significant:</p>
+        
+        <div class="character-section">
+            <div class="character-grid">
+                <div class="character-card">
+                    <h4 class="character-name">Derek Devon</h4>
+                    <p class="character-description">The author of the "Letter Guide." With knowledge of future events and the ability to alter timelines, Derek navigates the ethical complexities of his "do-over" life while preparing for a sailboat circumnavigation in his present time.</p>
+                </div>
+                
+                <div class="character-card">
+                    <h4 class="character-name">Rebecca</h4>
+                    <p class="character-description">The primary recipient of the "Letter Guide," referred to as "Dimples," "it-girl," and the "love of my lives." The guide reveals the truth about Derek's life and involves tasks for her to complete.</p>
+                </div>
+                
+                <div class="character-card">
+                    <h4 class="character-name">Tank</h4>
+                    <p class="character-description">One of the voices Derek hears in his head, representing a future being or AI who can influence thoughts and feelings and provides explanations about the technology involved in the timeline alterations.</p>
+                </div>
+                
+                <div class="character-card">
+                    <h4 class="character-name">Tina</h4>
+                    <p class="character-description">A girl Derek meets at a pre-high school party. Their relationship becomes a complex moral dilemma as Derek grapples with having adult knowledge in a young body.</p>
+                </div>
+                
+                <div class="character-card">
+                    <h4 class="character-name">Mr. Sunderland</h4>
+                    <p class="character-description">A mysterious figure who seems to possess detailed knowledge of Derek's activities, possibly connected to intelligence operations or surveillance.</p>
+                </div>
+                
+                <div class="character-card">
+                    <h4 class="character-name">Morpheus, Trinity, Cypher</h4>
+                    <p class="character-description">Names Derek assigns to different voices he hears during discussions about nanotechnology and other advanced concepts. The reference to "The Matrix" highlights Derek's love of sci-fi.</p>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Timeline Indicator -->
-    <div class="time-indicator">
-        <div class="time-line">
-            <div class="time-marker past" data-section="section1"></div>
-            <div class="time-label">Episode 1</div>
-            <div class="time-marker present" data-section="section2"></div>
-            <div class="time-label">Episode 2</div>
-            <div class="time-marker future" data-section="section3"></div>
-            <div class="time-label">Key Moments</div>
-        </div>
-    </div>
-
-    <!-- Blog Content -->
-    <section class="blog-content">
-        <div class="container">
-            <article class="blog-article">
-                <div class="article-header">
-                    <div class="ghost-text">SAM</div>
-                    <div class="blog-meta">
-                        <div class="blog-date">
-                            <i class="fas fa-calendar-alt"></i> April 26, 2025
-                        </div>
-                        <div class="blog-categories">
-                            <span class="category-tag">Supernatural</span>
-                            <span class="category-tag">Comedy</span>
-                        </div>
-                    </div>
-                    <h2 class="blog-title">Living with the Ghost of Sam: A Supernatural Comedy Series</h2>
-                    <p>A unique blend of comedy and the supernatural, exploring the bizarre connection between Derek and his deceased comedian cousin.</p>
-                </div>
-
-                <div class="article-body">
-                    <div class="spoiler-warning">
-                        <i class="fas fa-exclamation-triangle spoiler-icon"></i>
-                        <strong>Spoiler Warning:</strong> This blog contains plot details from Episodes 1 & 2
-                    </div>
-
-                    <div class="article-section" id="section1">
-                        <h3 class="section-heading">The Premise</h3>
-                        <p><span class="drop-cap">B</span>ased on the provided excerpts from "Living with the Ghost of Sam" Episodes 1 and 2, the story centers around Derek Kinison, the cousin of the late comedian Sam Kinison, and his wife Nancy Hammond, as they unexpectedly find themselves embroiled in a supernatural competition to win ownership of a mysterious Victorian mansion with strong ties to Sam's final days.</p>
-                        
-                        <p>Derek experiences a dramatic corporate meltdown that mirrors his late cousin Sam Kinison's explosive comedic style, suggesting a spiritual awakening or influence. This event acts as a catalyst for Derek to question his superficial corporate life and reconnect with a long-dormant desire for change.</p>
-                        
-                        <div class="terminal-section">
-                            <div class="terminal-header">
-                                <i class="fas fa-terminal terminal-icon"></i>
-                                <span class="terminal-title">Temporal Observation System</span>
-                            </div>
-                            <div class="terminal-content">
-                                <div class="terminal-line">Monitoring subject: Derek Kinison</div>
-                                <div class="terminal-line">Genetic component: Confirmed</div>
-                                <div class="terminal-line">Timeline convergence probability: 87.3%</div>
-                                <div class="terminal-line">Status: Awakening sequence initiated<span class="terminal-cursor"></span></div>
-                            </div>
-                        </div>
-                        
-                        <p>As the story unfolds, supernatural occurrences begin to manifest, seemingly linked to Sam Kinison's ghost, including fleeting appearances in mirrors, self-activating objects (pipe organ, toaster, coffee maker), and unexplained weather phenomena like thunder in clear skies.</p>
-                        
-                        <div class="highlight-quote">
-                            "Changes have consequences, and consequences make change!"
-                        </div>
-                        
-                        <p>The competition is set when Derek and Nancy encounter social media influencers Chad Wellington and Marina St. Clair, who are also interested in buying the mansion. This setup creates a perfect stage for both comedy and supernatural encounters.</p>
-                    </div>
-                    
-                    <div class="timeline-card past" id="episode1">
-                        <div class="timeline-header">
-                            <h4 class="timeline-title">Episode 1: "Leap of Faith"</h4>
-                            <span class="timeline-date">TIMELINE: PAST</span>
-                        </div>
-                        <p>The journey begins with Derek's corporate meltdown and the discovery of Ravencrest Mansion, a weathered Victorian mansion with a history as a psychiatric hospital and later a comedy club called "The Laugh Asylum".</p>
-                        
-                        <div class="highlight-box">
-                            <h5><i class="fas fa-key"></i> Key Revelations:</h5>
-                            <p>Nancy initially finds a painting of the mansion, sparking Derek's memory of a past dream. They meet Linda Rhodes, a mysterious realtor with hidden knowledge about the mansion's history. A red pentagram painted on the foyer floor hints at darker elements. The discovery of a comedy book purportedly by Sam Kinison published the month he died. The previous owner of the mansion died on the same day as Sam.</p>
-                        </div>
-                        
-                        <p>A high-stakes overnight challenge is proposed by the current owner through Linda, with the winner being the one who lasts until dawn. This dramatic proposition raises the stakes and promises supernatural confrontations.</p>
-                    </div>
-                    
-                    <div class="article-section" id="section2">
-                        <h3 class="section-heading">The Competition Unfolds</h3>
-                        <p>Episode 2, "Night Moves," opens with a mysterious "Temporal Observation System" monitoring Derek's past, revealing early signs of a connection to Sam and a later meeting with Nancy. The system notes a "genetic component" and "timeline convergence probability," suggesting a predetermined link between the Kinison and Blackwood bloodlines.</p>
-                        
-                        <div class="timeline-card present" id="episode2">
-                            <div class="timeline-header">
-                                <h4 class="timeline-title">Episode 2: "Night Moves"</h4>
-                                <span class="timeline-date">TIMELINE: PRESENT</span>
-                            </div>
-                            <p>Derek and Nancy prepare for the overnight stay, gathering supplies and encountering Earl, a local shopkeeper with cryptic knowledge about the mansion's history, including its past as a comedy venue where Sam Kinison performed his last show on April 9th, 1992.</p>
-                            
-                            <div class="highlight-box">
-                                <h5><i class="fas fa-ghost"></i> Supernatural Escalation:</h5>
-                                <p>The mansion becomes more active as the night progresses. Sam's voice can be heard through various devices, and the mansion attempts to communicate through shifting images on a comedy poster. Meanwhile, Chad and Marina face personalized supernatural torments that expose the superficiality of their relationship through the mansion's mirrors.</p>
-                            </div>
-                            
-                            <p>While the influencers' relationship implodes under the supernatural pressure, Derek and Nancy's bond strengthens as they navigate the strange events together, showing genuine connection and support for each other.</p>
-                        </div>
-                        
-                        <p>The episode ends with Chad and Marina's hasty departure from the mansion, leaving Derek and Nancy as the apparent winners of the overnight challenge. They decide to stay and uncover the secrets of Ravencrest, with the final scene showing Sam's ghost seemingly approving of their presence.</p>
-                    </div>
-                    
-                    <div class="article-section" id="section3">
-                        <h3 class="section-heading">Key Moments Worth Watching</h3>
-                        <p>What makes "Living with the Ghost of Sam" truly compelling are the moments that blend humor, supernatural elements, and genuine emotion. Here are some standout scenes that capture the essence of the series:</p>
-                        
-                        <div class="episode-grid">
-                            <div class="episode-card">
-                                <div class="episode-header">
-                                    <span class="episode-number">Episode 1</span>
-                                    <h4 class="episode-title">Corporate Breakdown</h4>
-                                </div>
-                                <div class="episode-content">
-                                    <p>Derek's corporate meltdown channeling Sam Kinison's explosive comedic style immediately establishes the central premise – the bizarre connection between Derek and his deceased cousin – and promises a blend of humor and the uncanny.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="episode-card">
-                                <div class="episode-header">
-                                    <span class="episode-number">Episode 1</span>
-                                    <h4 class="episode-title">The Pentagram</h4>
-                                </div>
-                                <div class="episode-content">
-                                    <p>The discovery of the red pentagram and Linda's nervous reaction introduces a layer of mystery and potential darkness to the mansion's history, hinting at more than just ghostly comedy.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="episode-card">
-                                <div class="episode-header">
-                                    <span class="episode-number">Episode 2</span>
-                                    <h4 class="episode-title">Ghostly Critics</h4>
-                                </div>
-                                <div class="episode-content">
-                                    <p>The personalized supernatural torments of Chad and Marina involving ghostly comedians in the mirrors offer a unique blend of humor, horror, and social commentary, showcasing the series' potential for creative supernatural sequences.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="episode-card">
-                                <div class="episode-header">
-                                    <span class="episode-number">Episode 2</span>
-                                    <h4 class="episode-title">Sam's Approval</h4>
-                                </div>
-                                <div class="episode-content">
-                                    <p>The final shot of Sam's ghost seemingly approving of Derek and Nancy indicates that the mansion and its ghostly inhabitant have a specific purpose for them, suggesting a larger narrative arc beyond just winning a house.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="terminal-section">
-                        <div class="terminal-header">
-                            <i class="fas fa-terminal terminal-icon"></i>
-                            <span class="terminal-title">Timeline Analysis</span>
-                        </div>
-                        <div class="terminal-content">
-                            <div class="terminal-line">Sam Kinison DOD: April 10, 1992</div>
-                            <div class="terminal-line">Last Performance: The Laugh Asylum, April 9, 1992</div>
-                            <div class="terminal-line">Ravencrest Owner DOD: April 10, 1992</div>
-                            <div class="terminal-line">Timeline inconsistency detected: Historical records show no performance on this date</div>
-                            <div class="terminal-line">Conclusion: Reality breach confirmed<span class="terminal-cursor"></span></div>
-                        </div>
-                    </div>
-                    
-                    <div class="article-section" id="conclusion">
-                        <h3 class="section-heading">Why You Should Watch</h3>
-                        <p>Ultimately, "Living with the Ghost of Sam" offers a unique blend of comedic and supernatural elements, driven by the intriguing mystery surrounding Sam Kinison's connection to Ravencrest Mansion. The series promises to explore themes of destiny, the search for authenticity, and the complexities of relationships, all while delivering humorous and spooky encounters with the spirit world.</p>
-                        
-                        <p>The dynamic between Derek and Nancy, as they navigate these bizarre events, provides a compelling human element to the fantastical premise. Their genuine connection stands in stark contrast to the superficial relationship of Chad and Marina, highlighting the show's message about authenticity in a world of facades.</p>
-                        
-                        <div class="highlight-quote">
-                            "The past leaves echoes. Some louder than others. Some funny. Some tragic. All connected."
-                        </div>
+        
+        <h2>A Timeline of Key Events</h2>
+        
+        <p>The narrative structure of "A Letter Guide For Rebecca" is non-linear, shifting between various time periods and realities. Here's a chronological glimpse at some of the key moments:</p>
+        
+        <div class="timeline-section">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4 class="timeline-title">The Re-Implantation</h4>
+                        <p class="timeline-text">Derek is "re-implanted" at age 12 with his adult memories, setting up the central premise of his "do-over" life.</p>
                     </div>
                 </div>
-            </article>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-grid"></div>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">Devon Publishing LLC</div>
-                <nav class="footer-nav">
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="where-to-buy.html">Where To Buy</a></li>
-                        <li><a href="bookbio.html">Book Bio</a></li>
-                        <li><a href="author-bio.html">Author Bio</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </nav>
-                <div class="copyright">
-                    <p>&copy; 2023 by Devon Publishing. All rights reserved.</p>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4 class="timeline-title">First Days Back</h4>
+                        <p class="timeline-text">Going to buy school supplies with his mother, who notices his different vocabulary and diction, marking the beginning of his adaptation to his younger self.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4 class="timeline-title">Pre-High School Party</h4>
+                        <p class="timeline-text">Meeting Tina, Sherry, Cindy, and Dawn. Derek attempts to navigate social interactions with his adult mind in a child's body.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4 class="timeline-title">The Movie Theater with Tina</h4>
+                        <p class="timeline-text">An interrupted moment of connection, with the mysterious "Mr. 'V'" offering Glossette Peanuts, suggesting observation from future entities.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4 class="timeline-title">First Skinny Dipping at Hermitage Pond</h4>
+                        <p class="timeline-text">A significant moment with Rebecca, accompanied by a clapping sound later understood to be from Derek's "future friends."</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4 class="timeline-title">Helping Rebecca During a "Girl's Accident"</h4>
+                        <p class="timeline-text">Derek assists Rebecca with a sensitive situation, demonstrating his care for her while utilizing his Chemistry classroom knowledge.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4 class="timeline-title">The Strange Odor Incident</h4>
+                        <p class="timeline-text">While sitting on the dock near his sailboat, Derek detects an unfamiliar odor that precedes a life-changing encounter.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4 class="timeline-title">Contact with Future Beings</h4>
+                        <p class="timeline-text">Derek interacts with unseen beings who communicate through his mind, discussing his memories of "Rebecca 1.0" and their advanced technology.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4 class="timeline-title">Present Day - Preparing for Circumnavigation</h4>
+                        <p class="timeline-text">Derek readies his sailboat 'It-girl' for a circumnavigation as he approaches retirement at age 65.</p>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        <h2>Frequently Asked Questions</h2>
+        
+        <div class="faq-section">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    What is the purpose of the "Letter Guide for Rebecca"?
+                </div>
+                <div class="faq-answer">
+                    <p>The guide serves as a form of confession, explanation, and a passing of knowledge from Derek Devon to Rebecca. It reveals that his seemingly uncanny ability to know what would happen was not luck but the result of living through time before. Derek aims to explain his past actions and the far-reaching consequences of the choices he made, entrusting Rebecca with this unique and potentially world-altering information.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    What is the significance of the "Proofing Test"?
+                </div>
+                <div class="faq-answer">
+                    <p>The "Proofing Test" is a pivotal moment where Derek challenges Rebecca to perform a seemingly inexplicable action—sticking her hand in water based on a specific number—to prove whether he is telling the truth or is delusional. This test, linked to their shared personal history ("Our Number"), is designed to provide undeniable evidence to Rebecca of the extraordinary nature of his claims.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Why is Derek preparing for a circumnavigation?
+                </div>
+                <div class="faq-answer">
+                    <p>Derek is planning to retire in a couple of years, around the age of 65, and use his full pension to embark on a solo circumnavigation of the globe on his extensively renovated Morgan Out Island sailboat, "It-girl." The boat is equipped with substantial solar power and battery systems to support his needs while at sea, suggesting both a practical plan and perhaps a symbolic journey.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    What are the science fiction elements in the novel?
+                </div>
+                <div class="faq-answer">
+                    <p>The novel incorporates several science fiction elements, including time travel or altered realities, communication with future beings, nanotechnology capable of manipulating cells at a microscopic level, and references to concepts like the "Prime Directive" from Star Trek. These elements serve as vehicles to explore deeper themes about free will, determinism, and the nature of reality itself.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    How does the novel explore ethical dilemmas?
+                </div>
+                <div class="faq-answer">
+                    <p>The novel grapples with complex ethical questions about the responsible use of foreknowledge. Derek must decide whether to intervene in events to prevent tragedies, how to navigate relationships with people who don't know his true nature, and the moral implications of having an adult consciousness in a child's body. The phrase "With great power, comes great responsibility" appears in the text, highlighting Derek's awareness of the ethical weight of his unique situation.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="call-to-action">
+            <h3 class="cta-title">Begin Your Journey Through Time</h3>
+            <p class="cta-text">Immerse yourself in the world of "A Letter Guide For Rebecca" and explore the profound questions about time, memory, and the choices that shape our reality.</p>
+            <a href="#" class="cta-button">Get Your Copy Today</a>
+        </div>
+    </main>
+    
+    <footer class="footer container">
+        <p>&copy; 2025 ALetterGuideForRebecca.com. All rights reserved.</p>
     </footer>
-
+    
     <script>
-        // Create particles for the background
-        document.addEventListener('DOMContentLoaded', function() {
-            const particleContainer = document.getElementById('particleContainer');
-            const particleCount = 100;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Random positions
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                const size = Math.random() * 4 + 1;
-                const opacity = Math.random() * 0.5 + 0.2;
-                const delay = Math.random() * 10;
-                const duration = Math.random() * 10 + 10;
-                
-                // Apply styles
-                particle.style.left = `${posX}%`;
-                particle.style.top = `${posY}%`;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.opacity = opacity;
-                particle.style.animationDelay = `${delay}s`;
-                particle.style.animationDuration = `${duration}s`;
-                
-                // Add to container
-                particleContainer.appendChild(particle);
+        function openTab(evt, tabId) {
+            // Hide all tab content
+            var tabContent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabContent.length; i++) {
+                tabContent[i].className = tabContent[i].className.replace(" active", "");
             }
             
-            // Intersection Observer for fade-in effect
-            const sections = document.querySelectorAll('.article-section');
-            const options = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -100px 0px'
-            };
-            
-            const observer = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, options);
-            
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-            
-            // Timeline dots functionality
-            const timeDots = document.querySelectorAll('.time-dot');
-            timeDots.forEach(dot => {
-                dot.addEventListener('click', function() {
-                    // Remove active class from all dots
-                    timeDots.forEach(d => d.classList.remove('active'));
-                    
-                    // Add active class to clicked dot
-                    this.classList.add('active');
-                    
-                    // Get time period
-                    const timePeriod = this.getAttribute('data-time');
-                    
-                    // Update body attribute for CSS changes
-                    document.body.setAttribute('data-time-period', timePeriod);
-                    
-                    // Change particles color based on time period
-                    const particles = document.querySelectorAll('.particle');
-                    particles.forEach(particle => {
-                        particle.classList.remove('past', 'present', 'future');
-                        particle.classList.add(timePeriod);
-                    });
-                });
-            });
-            
-            // Timeline markers functionality
-            const timeMarkers = document.querySelectorAll('.time-marker');
-            timeMarkers.forEach(marker => {
-                marker.addEventListener('click', function() {
-                    const sectionId = this.getAttribute('data-section');
-                    const section = document.getElementById(sectionId);
-                    
-                    if (section) {
-                        section.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
-            
-            // Ghost Easter Egg
-            const ghostEgg = document.getElementById('ghostEgg');
-                var easterEggTrigger = document.querySelector('.copyright a');
-                
-                if (easterEggTrigger) {
-                    easterEggTrigger.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        
-                        // Position ghost randomly
-                        const posX = Math.random() * 80 + 10;
-                        const posY = Math.random() * 60 + 20;
-                        
-                        ghostEgg.style.left = `${posX}%`;
-                        ghostEgg.style.top = `${posY}%`;
-                        ghostEgg.style.opacity = '1';
-                        
-                        // Hide after 3 seconds
-                        setTimeout(() => {
-                            ghostEgg.style.opacity = '0';
-                        }, 3000);
-                    });
-                }
-            
-            // Random ghost appearances
-            setInterval(() => {
-                if (Math.random() > 0.97) { // 3% chance of ghost appearing
-                    const posX = Math.random() * 80 + 10;
-                    const posY = Math.random() * 60 + 20;
-                    
-                    ghostEgg.style.left = `${posX}%`;
-                    ghostEgg.style.top = `${posY}%`;
-                    ghostEgg.style.opacity = '1';
-                    
-                    setTimeout(() => {
-                        ghostEgg.style.opacity = '0';
-                    }, 2000);
-                }
-            }, 10000);
-            
-            // Mobile menu toggle
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
-            const mainNav = document.querySelector('.main-navigation');
-            
-            if (menuToggle) {
-                menuToggle.addEventListener('click', () => {
-                    mainNav.classList.toggle('active');
-                });
+            // Remove active class from all tab buttons
+            var tabButtons = document.getElementsByClassName("tab-button");
+            for (var i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].className = tabButtons[i].className.replace(" active", "");
             }
-        });
+            
+            // Show the current tab and add active class to the button
+            document.getElementById(tabId).className += " active";
+            evt.currentTarget.className += " active";
+        }
+        
+        function toggleFaq(element) {
+            var faqItem = element.parentElement;
+            faqItem.className = faqItem.className.includes("active") ? 
+                faqItem.className.replace(" active", "") : 
+                faqItem.className + " active";
+        }
     </script>
 </body>
 </html>
