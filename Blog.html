@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@400;700&family=Special+Elite&family=VT323&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2a0b45;
+            --primary-color: #333;
             --secondary-color: #9c27b0;
             --accent-color: #ff4081;
             --highlight-color: #00e5ff;
@@ -23,7 +23,7 @@
             --present-color: #2196f3;
             --future-color: #e040fb;
             --text-color: #ffffff;
-            --card-bg: rgba(18, 18, 18, 0.95);
+            --card-bg: rgba(30, 30, 30, 0.95);
             --highlight-bg: rgba(156, 39, 176, 0.2);
         }
 
@@ -107,13 +107,10 @@
         }
 
         .site-branding {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
+            color: #333;
         }
 
         .site-branding a {
@@ -171,7 +168,7 @@
             height: 60vh;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            background: linear-gradient(135deg, #333, #121212);
         }
 
         .temporal-grid {
@@ -216,6 +213,7 @@
             display: inline-block;
             text-shadow: 0 0 10px rgba(255, 64, 129, 0.5);
             animation: glitchEffect 5s infinite;
+            color: #fff;
         }
 
         @keyframes glitchEffect {
@@ -400,7 +398,7 @@
 
         .article-header {
             padding: 2rem;
-            background: linear-gradient(135deg, #3a0e60, #9c27b0);
+            background: linear-gradient(135deg, #333, #666);
             color: #ffffff;
             position: relative;
             overflow: hidden;
@@ -598,7 +596,7 @@
 
         .episode-header {
             padding: 1.5rem;
-            background: linear-gradient(135deg, #3a0e60, #9c27b0);
+            background: linear-gradient(135deg, #333, #666);
             position: relative;
             color: #ffffff;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
@@ -880,16 +878,16 @@
         <div class="container">
             <div class="header-content">
                 <div class="site-branding">
-                    <a href="index.html">Living with the Ghost of Sam</a>
+                    <a href="index.html">Devon Publishing LLC</a>
                 </div>
                 <nav class="main-navigation">
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="episodes.html">Episodes</a></li>
-                        <li><a href="characters.html">Characters</a></li>
+                        <li><a href="where-to-buy.html">Where To Buy</a></li>
+                        <li><a href="bookbio.html">Book Bio</a></li>
+                        <li><a href="author-bio.html">Author Bio</a></li>
                         <li><a href="blog.html" class="active">Blog</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
                 </nav>
                 <div class="mobile-menu-toggle">
@@ -903,7 +901,7 @@
     <section class="blog-hero">
         <div class="temporal-grid"></div>
         <div class="hero-content">
-            <h1 class="hero-title">Ghost of Sam: Blog</h1>
+            <h1 class="hero-title">Living with the Ghost of Sam</h1>
             <p class="hero-subtitle">Exploring the supernatural comedy series</p>
             <div class="time-controller">
                 <span class="time-label">Timeline:</span>
@@ -1099,19 +1097,19 @@
         <div class="footer-grid"></div>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">Living with the Ghost of Sam</div>
+                <div class="footer-logo">Devon Publishing LLC</div>
                 <nav class="footer-nav">
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="episodes.html">Episodes</a></li>
-                        <li><a href="characters.html">Characters</a></li>
+                        <li><a href="where-to-buy.html">Where To Buy</a></li>
+                        <li><a href="bookbio.html">Book Bio</a></li>
+                        <li><a href="author-bio.html">Author Bio</a></li>
                         <li><a href="blog.html">Blog</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
                 </nav>
                 <div class="copyright">
-                    <p>&copy; 2025 All Rights Reserved | Developed by <a href="#" id="easterEggTrigger">Your Studio</a></p>
+                    <p>&copy; 2023 by Devon Publishing. All rights reserved.</p>
                 </div>
             </div>
         </div>
@@ -1207,24 +1205,26 @@
             
             // Ghost Easter Egg
             const ghostEgg = document.getElementById('ghostEgg');
-            const easterEggTrigger = document.getElementById('easterEggTrigger');
-            
-            easterEggTrigger.addEventListener('click', function(e) {
-                e.preventDefault();
+                var easterEggTrigger = document.querySelector('.copyright a');
                 
-                // Position ghost randomly
-                const posX = Math.random() * 80 + 10;
-                const posY = Math.random() * 60 + 20;
-                
-                ghostEgg.style.left = `${posX}%`;
-                ghostEgg.style.top = `${posY}%`;
-                ghostEgg.style.opacity = '1';
-                
-                // Hide after 3 seconds
-                setTimeout(() => {
-                    ghostEgg.style.opacity = '0';
-                }, 3000);
-            });
+                if (easterEggTrigger) {
+                    easterEggTrigger.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        // Position ghost randomly
+                        const posX = Math.random() * 80 + 10;
+                        const posY = Math.random() * 60 + 20;
+                        
+                        ghostEgg.style.left = `${posX}%`;
+                        ghostEgg.style.top = `${posY}%`;
+                        ghostEgg.style.opacity = '1';
+                        
+                        // Hide after 3 seconds
+                        setTimeout(() => {
+                            ghostEgg.style.opacity = '0';
+                        }, 3000);
+                    });
+                }
             
             // Random ghost appearances
             setInterval(() => {
